@@ -253,3 +253,8 @@
     }
   }
 }
+
+
+.all-cap{
+  text-transform: uppercase !important;
+}

@@ -7,39 +7,67 @@ const Testimonials = () => {
     {
       id: 1,
       rating: 5,
-      text: "Working with HACHI AGENCY has been a game-changer for our app's user experience.",
-      additionalText: "Their innovative UI designs and seamless Framer development have elevated our product to new heights. Kudos to HACHI for their expertise and dedication.",
-      author: "Joakim Korsgaard",
-      position: "CEO, Tech Innovations",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80"
+      text: "I had no idea where to start with a website, but they provided me an amazing free preview and updated me on every step. The end result was even better than I pictured, and the process was smooth from day one.",
+      author: "Warman, SK",
+      location: "Salt Lake City, UT",
+      avatar: ""
     },
     {
       id: 2,
       rating: 5,
-      text: "As a fellow UI/UX designer, I'm truly impressed by HACHI AGENCY's ability to create visually stunning and user-friendly interfaces.",
-      additionalText: "Their Framer development skills bring designs to life effortlessly. A true professional in the field!",
-      author: "Maria Septimus",
-      position: "Lead Designer, Dynamics Agency",
-      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80"
+      text: "Most agencies push their own style, but this team really listened to our vision. The site feels like us just better.",
+      author: "Kevin W",
+      location: "Saskatoon, SK",
+      avatar: ""
     },
     {
       id: 3,
       rating: 5,
-      text: "We collaborated with HACHI AGENCY on a critical project, and their UI/UX designs not only met but exceeded our expectations.",
-      additionalText: "It's a pleasure to work with professionals who understand the art and science of user experience.",
-      author: "Giana Kenter",
-      position: "Founder, Mobile Dynamics Startup",
-      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80"
+      text: "The team nailed the look and feel of our brand right from the start. The site looks beautiful, loads fast, and works perfectly on mobile. We've had so many compliments from our customers already!",
+      author: "Amanda T.",
+      location: "Toronto, ON",
+      avatar: ""
     },
     {
       id: 4,
       rating: 5,
-      text: "Working with HACHI AGENCY has been a game-changer for our app's user experience.",
-      additionalText: "Their innovative UI designs and seamless Framer development have elevated our product to new heights. Kudos to HACHI for their expertise and dedication.",
-      author: "Sienna Hewitt",
-      position: "CEO, Tech Innovations",
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80"
-    }
+      text: "After launching the new site, our online orders and inquiries doubled. They didn’t just build a website they created a real growth tool for our business.Jason M.",
+      author: "Jason M.",
+      location: "Vancouver, BC",
+      avatar: ""
+    },
+    {
+      id: 5,
+      rating: 5,
+      text: "They delivered our full website faster than we expected, and the process was smooth from start to finish. We felt like we were in great hands the entire time.",
+      author: "Sarah L.",
+      location: "Calgary, AB",
+      avatar: ""
+    },
+    {
+      id: 6,
+      rating: 5,
+      text: "What I found most impressive was their ability to execute and explain why they made the decisions they did. They were clearly experts, our bounce rate dropped and conversions went up. These guys know what ",
+      author: "Jory B.",
+      location: "Prince Albert, SK",
+      avatar: ""
+    },
+    {
+      id: 7,
+      rating: 5,
+      text: "We’ve built a strong local reputation — but online, we were invisible. Now our website reflects the quality we deliver, and our bookings have gone up.",
+      author: "Mark G",
+      location: "Montreal, QC",
+      avatar: ""
+    },
+    {
+      id: 8,
+      rating: 5,
+      text: "We’ve already seen at least a 44% increase in lead generation within the first 2-3 weeks since the redesign. They did a fantastic job on the website and took the time to understand our market and industry.",
+      author: "Ryan P",
+      location: "Regina, SK",
+      avatar: ""
+    },
   ];
 
   const renderStars = (rating: number) => {
@@ -77,13 +105,13 @@ const Testimonials = () => {
               </div>
 
               {/* Testimonial Text */}
-              <p className="text-white font-semibold mb-3 text-sm leading-relaxed">
+              <p className="text-white font-semibold mb-3 text-sm leading-relaxed"style={{minHeight:"9.8em"}}>
                 {testimonial.text}
               </p>
               
-              <p className="text-white text-sm mb-6 leading-relaxed">
+              {/* <p className="text-white text-sm mb-6 leading-relaxed">
                 {testimonial.additionalText}
-              </p>
+              </p> */}
 
               {/* Author with Avatar Component */}
               <div className="flex items-center">
@@ -102,7 +130,7 @@ const Testimonials = () => {
                     {testimonial.author}
                   </div>
                   <div className="text-white text-xs truncate">
-                    {testimonial.position}
+                    {testimonial.location}
                   </div>
                 </div>
               </div>

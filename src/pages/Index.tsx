@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -50,35 +49,45 @@ const Index = () => {
 	});
 
 	// Counter animation hook
-	const useCountAnimation = (end: number, duration: number = 2000, suffix: string = '') => {
+	const useCountAnimation = (
+		end: number,
+		duration: number = 2000,
+		suffix: string = "",
+	) => {
 		const [count, setCount] = useState(0);
 		const [hasAnimated, setHasAnimated] = useState(false);
 		const countRef = useRef<HTMLDivElement>(null);
 
 		useEffect(() => {
-			const observer = new IntersectionObserver((entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting && !hasAnimated) {
-						setHasAnimated(true);
-						let startTime: number;
-						const animate = (currentTime: number) => {
-							if (!startTime) startTime = currentTime;
-							const progress = Math.min((currentTime - startTime) / duration, 1);
-							
-							// Easing function for smooth animation
-							const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-							setCount(Math.floor(easeOutQuart * end));
-							
-							if (progress < 1) {
-								requestAnimationFrame(animate);
-							} else {
-								setCount(end);
-							}
-						};
-						requestAnimationFrame(animate);
-					}
-				});
-			}, { threshold: 0.3 });
+			const observer = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting && !hasAnimated) {
+							setHasAnimated(true);
+							let startTime: number;
+							const animate = (currentTime: number) => {
+								if (!startTime) startTime = currentTime;
+								const progress = Math.min(
+									(currentTime - startTime) / duration,
+									1,
+								);
+
+								// Easing function for smooth animation
+								const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+								setCount(Math.floor(easeOutQuart * end));
+
+								if (progress < 1) {
+									requestAnimationFrame(animate);
+								} else {
+									setCount(end);
+								}
+							};
+							requestAnimationFrame(animate);
+						}
+					});
+				},
+				{ threshold: 0.3 },
+			);
 
 			if (countRef.current) {
 				observer.observe(countRef.current);
@@ -94,23 +103,23 @@ const Index = () => {
 	useEffect(() => {
 		const observerOptions = {
 			threshold: 0.2,
-			rootMargin: '0px 0px -50px 0px'
+			rootMargin: "0px 0px -50px 0px",
 		};
 
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
 				if (entry.isIntersecting) {
-					if (!entry.target.classList.contains('animated')) {
-						entry.target.classList.add('animate-fade-in');
-						entry.target.classList.remove('opacity-0');
-						entry.target.classList.add('animated');
+					if (!entry.target.classList.contains("animated")) {
+						entry.target.classList.add("animate-fade-in");
+						entry.target.classList.remove("opacity-0");
+						entry.target.classList.add("animated");
 					}
 				}
 			});
 		}, observerOptions);
 
 		// Observe all elements with scroll-trigger class
-		const elements = document.querySelectorAll('.scroll-trigger');
+		const elements = document.querySelectorAll(".scroll-trigger");
 		elements.forEach((el) => observer.observe(el));
 
 		return () => observer.disconnect();
@@ -196,9 +205,9 @@ const Index = () => {
 	];
 
 	// Counter hooks for stats
-	const projectsCount = useCountAnimation(49, 2000, '+');
-	const satisfactionCount = useCountAnimation(98, 2000, '%');
-	const experienceCount = useCountAnimation(5, 2000, '+');
+	const projectsCount = useCountAnimation(49, 2000, "+");
+	const satisfactionCount = useCountAnimation(98, 2000, "%");
+	const experienceCount = useCountAnimation(5, 2000, "+");
 
 	return (
 		<div className="min-h-screen bg-background">
@@ -213,15 +222,17 @@ const Index = () => {
 							</span>
 						</div>
 						<div className="hidden md:flex items-center space-x-8">
-							{['Home', 'Services', 'Portfolio', 'About', 'Contact'].map((item) => (
-								<a
-									key={item}
-									href={`#${item.toLowerCase()}`}
-									className="text-foreground hover:text-[#38B6FF] transition-all duration-300 transform hover:scale-110"
-								>
-									{item}
-								</a>
-							))}
+							{["Home", "Services", "Portfolio", "About", "Contact"].map(
+								(item) => (
+									<a
+										key={item}
+										href={`#${item.toLowerCase()}`}
+										className="text-foreground hover:text-[#38B6FF] transition-all duration-300 transform hover:scale-110"
+									>
+										{item}
+									</a>
+								),
+							)}
 						</div>
 					</div>
 				</div>
@@ -234,9 +245,24 @@ const Index = () => {
 			>
 				{/* Animated Blobs for Hero */}
 				<AnimatedBlob size="large" color="blue" position="top-left" delay={0} />
-				<AnimatedBlob size="medium" color="white" position="top-right" delay={2} />
-				<AnimatedBlob size="small" color="blue" position="bottom-left" delay={4} />
-				<AnimatedBlob size="medium" color="white" position="bottom-right" delay={1} />
+				<AnimatedBlob
+					size="medium"
+					color="white"
+					position="top-right"
+					delay={2}
+				/>
+				<AnimatedBlob
+					size="small"
+					color="blue"
+					position="bottom-left"
+					delay={4}
+				/>
+				<AnimatedBlob
+					size="medium"
+					color="white"
+					position="bottom-right"
+					delay={1}
+				/>
 				<FloatingElements />
 
 				<div className="relative z-10 container mx-auto px-4 py-20">
@@ -254,9 +280,7 @@ const Index = () => {
 								<h1 className="text-5xl md:text-7xl font-bold text-foreground leading-tight">
 									Build Your
 									<br />
-									<span className="text-[#38B6FF]">
-										Digital
-									</span>
+									<span className="text-[#38B6FF]">Digital</span>
 									<br />
 									<TypingAnimation
 										texts={typingTexts}
@@ -328,9 +352,7 @@ const Index = () => {
 											<div className="w-8 h-8 bg-white rounded-full border-2 border-white"></div>
 											<div className="w-8 h-8 bg-[#38B6FF] rounded-full border-2 border-white"></div>
 											<div className="w-8 h-8 bg-white rounded-full border-2 border-white flex items-center justify-center">
-												<span className="text-xs font-bold text-black">
-													+
-												</span>
+												<span className="text-xs font-bold text-black">+</span>
 											</div>
 										</div>
 										<span className="text-sm text-foreground font-medium">
@@ -415,8 +437,18 @@ const Index = () => {
 				className="py-20 bg-background relative overflow-hidden"
 			>
 				{/* Animated Blobs for Portfolio */}
-				<AnimatedBlob size="large" color="white" position="top-right" delay={1} />
-				<AnimatedBlob size="medium" color="blue" position="bottom-left" delay={3} />
+				<AnimatedBlob
+					size="large"
+					color="white"
+					position="top-right"
+					delay={1}
+				/>
+				<AnimatedBlob
+					size="medium"
+					color="blue"
+					position="bottom-left"
+					delay={3}
+				/>
 				<AnimatedBlob size="small" color="white" position="center" delay={5} />
 				<FloatingElements />
 
@@ -424,7 +456,7 @@ const Index = () => {
 					<div className="text-center mb-16 flex flex-col items-center relative">
 						<Badge className="mb-4 bg-[#38B6FF] text-white">Our Work</Badge>
 						<h2 className="text-4xl md:text-5xl font-bold text-foreground mb-2 flex items-center justify-center gap-2">
-							<span>Portfolio Highlights</span>
+							<span className="all-cap">Portfolio Highlights</span>
 						</h2>
 						<p className="text-xl text-foreground max-w-3xl mx-auto mb-4">
 							Discover some of our recent projects that showcase our expertise
@@ -437,7 +469,7 @@ const Index = () => {
 								<Card className="group overflow-hidden transition-all duration-500 border-border bg-card transform hover:scale-[1.02] hover:shadow-2xl relative">
 									{/* Animated border gradient */}
 									<div className="absolute inset-0 bg-gradient-to-r from-[#38B6FF]/20 via-transparent to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg"></div>
-									
+
 									<div className="relative overflow-hidden rounded-t-lg">
 										<img
 											src={item.image}
@@ -447,11 +479,13 @@ const Index = () => {
 										{/* Overlay with animated elements */}
 										<div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
 											<div className="text-white text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-												<div className="text-lg font-semibold mb-2">View Project</div>
+												<div className="text-lg font-semibold mb-2">
+													View Project
+												</div>
 												<div className="w-12 h-0.5 bg-[#38B6FF] mx-auto"></div>
 											</div>
 										</div>
-										
+
 										{/* Floating badge */}
 										<div className="absolute top-4 right-4 transform translate-x-8 group-hover:translate-x-0 transition-transform duration-500">
 											<Badge className="bg-[#38B6FF]/90 text-white backdrop-blur-sm">
@@ -459,13 +493,13 @@ const Index = () => {
 											</Badge>
 										</div>
 									</div>
-									
+
 									<CardHeader className="relative">
 										{/* Animated background pattern */}
 										<div className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500">
 											<div className="w-full h-full bg-gradient-to-br from-[#38B6FF] to-white"></div>
 										</div>
-										
+
 										<div className="flex items-center justify-between relative z-10">
 											<div className="space-y-2">
 												<CardTitle className="group-hover:text-[#38B6FF] transition-colors duration-300 text-foreground text-xl">
@@ -478,7 +512,7 @@ const Index = () => {
 											</div>
 											<ArrowRight className="w-6 h-6 text-foreground group-hover:text-[#38B6FF] transition-all duration-300 transform group-hover:translate-x-1 group-hover:scale-110" />
 										</div>
-										
+
 										{/* Progress bar animation */}
 										<div className="mt-4 h-1 bg-border rounded-full overflow-hidden">
 											<div className="h-full bg-gradient-to-r from-[#38B6FF] to-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-1000 ease-out"></div>
@@ -512,49 +546,83 @@ const Index = () => {
 			<WorkingProcess />
 
 			{/* Enhanced About Section with Animated Counters */}
-			<section id="about" className="py-20 bg-background relative overflow-hidden">
+			<section
+				id="about"
+				className="py-20 bg-background relative overflow-hidden"
+			>
 				{/* Animated Blobs for About */}
-				<AnimatedBlob size="medium" color="blue" position="top-left" delay={0} />
-				<AnimatedBlob size="large" color="white" position="bottom-right" delay={2} />
-				<AnimatedBlob size="small" color="white" position="top-right" delay={4} />
+				<AnimatedBlob
+					size="medium"
+					color="blue"
+					position="top-left"
+					delay={0}
+				/>
+				<AnimatedBlob
+					size="large"
+					color="white"
+					position="bottom-right"
+					delay={2}
+				/>
+				<AnimatedBlob
+					size="small"
+					color="white"
+					position="top-right"
+					delay={4}
+				/>
 				<FloatingElements />
 
 				<div className="container mx-auto px-4 relative z-10">
 					<div className="grid lg:grid-cols-2 gap-16 items-center">
 						<div className="scroll-trigger opacity-0">
 							<Badge className="mb-4 bg-[#38B6FF] text-white">About Us</Badge>
-							<h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+							{/* <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
 								Crafting Digital Excellence Since Day One
-							</h2>
+							</h2> */}
 							<p className="text-lg text-foreground mb-8">
-								At HACHI AGENCY, we're passionate about creating digital
-								experiences that matter. Our team of skilled developers,
-								designers, and strategists work together to bring your vision to
-								life with cutting-edge technology and creative innovation.
+								We’re a results-driven website agency built for businesses that
+								want more than just “a beautiful website.” Our mission is
+								simple: create stunning, high-converting websites that drive
+								real growth so you can focus on your business.
+							</p>
+							<p className="text-lg text-foreground mb-8">
+								Whether you're a local business, web 3 service or startup, we
+								combine top-tier design with smart strategy so your website
+								doesn’t just look great, it works. With custom UX/UI and a deep
+								focus on conversions, we help you turn visitors into loyal
+								customers.
 							</p>
 							<div className="grid grid-cols-3 gap-8 mb-8">
-								<div ref={projectsCount.countRef} className="text-center transform hover:scale-110 transition-transform duration-300">
+								<div
+									ref={projectsCount.countRef}
+									className="text-center transform hover:scale-110 transition-transform duration-300"
+								>
 									<div className="text-3xl font-bold text-[#38B6FF] mb-2">
 										{projectsCount.displayValue}
 									</div>
 									<div className="text-foreground">Projects Completed</div>
 								</div>
-								<div ref={satisfactionCount.countRef} className="text-center transform hover:scale-110 transition-transform duration-300">
+								<div
+									ref={satisfactionCount.countRef}
+									className="text-center transform hover:scale-110 transition-transform duration-300"
+								>
 									<div className="text-3xl font-bold text-[#38B6FF] mb-2">
 										{satisfactionCount.displayValue}
 									</div>
 									<div className="text-foreground">Client Satisfaction</div>
 								</div>
-								<div ref={experienceCount.countRef} className="text-center transform hover:scale-110 transition-transform duration-300">
+								<div
+									ref={experienceCount.countRef}
+									className="text-center transform hover:scale-110 transition-transform duration-300"
+								>
 									<div className="text-3xl font-bold text-[#38B6FF] mb-2">
 										{experienceCount.displayValue}
 									</div>
 									<div className="text-foreground">Years Experience</div>
 								</div>
 							</div>
-							<Button className="bg-[#38B6FF] hover:bg-white hover:text-black text-white transform hover:scale-105 transition-all duration-300">
+							{/* <Button className="bg-[#38B6FF] hover:bg-white hover:text-black text-white transform hover:scale-105 transition-all duration-300">
 								Learn More About Us
-							</Button>
+							</Button> */}
 						</div>
 						<div className="relative scroll-trigger opacity-0">
 							<img
@@ -566,7 +634,9 @@ const Index = () => {
 								<div className="flex items-center space-x-4">
 									<Award className="w-8 h-8 text-[#38B6FF]" />
 									<div>
-										<div className="font-bold text-foreground">Award Winning</div>
+										<div className="font-bold text-foreground">
+											Award Winning
+										</div>
 										<div className="text-foreground">Design Agency</div>
 									</div>
 								</div>
@@ -608,9 +678,12 @@ const Index = () => {
 								{ icon: Search, label: "Discover" },
 								{ icon: Palette, label: "Design" },
 								{ icon: Laptop, label: "Develop" },
-								{ icon: Rocket, label: "Deliver" }
+								{ icon: Rocket, label: "Deliver" },
 							].map((item, index) => (
-								<div key={index} className="flex flex-col items-center scroll-trigger opacity-0 transform hover:scale-110 transition-all duration-300">
+								<div
+									key={index}
+									className="flex flex-col items-center scroll-trigger opacity-0 transform hover:scale-110 transition-all duration-300"
+								>
 									<div className="w-12 h-12 bg-card border-2 border-border rounded-full flex items-center justify-center mb-2 hover:border-[#38B6FF] transition-colors duration-300">
 										<item.icon className="w-6 h-6 text-[#38B6FF]" />
 									</div>
@@ -631,18 +704,39 @@ const Index = () => {
 								</h3>
 								<div className="space-y-6">
 									{[
-										{ icon: Mail, title: "Email", content: ["hachiagency.com@gmail.com", "contact@hachiagency.com"] },
-										{ icon: Phone, title: "Phone", content: ["+1 (555) 123-4567"] },
-										{ icon: MapPin, title: "Location", content: ["San Francisco, CA"] }
+										{
+											icon: Mail,
+											title: "Email",
+											content: [
+												"contact@hachiagency.com",
+											],
+										},
+										{
+											icon: Phone,
+											title: "Phone",
+											content: ["306-491-5910"],
+										},
+										// {
+										// 	icon: MapPin,
+										// 	title: "Location",
+										// 	content: ["San Francisco, CA"],
+										// },
 									].map((item, index) => (
-										<div key={index} className="flex items-center space-x-4 transform hover:scale-105 transition-transform duration-300 scroll-trigger opacity-0">
+										<div
+											key={index}
+											className="flex items-center space-x-4 transform hover:scale-105 transition-transform duration-300 scroll-trigger opacity-0"
+										>
 											<div className="w-12 h-12 bg-[#38B6FF] rounded-lg flex items-center justify-center">
 												<item.icon className="w-6 h-6 text-white" />
 											</div>
 											<div>
-												<div className="font-semibold text-foreground">{item.title}</div>
+												<div className="font-semibold text-foreground">
+													{item.title}
+												</div>
 												{item.content.map((text, i) => (
-													<div key={i} className="text-foreground">{text}</div>
+													<div key={i} className="text-foreground">
+														{text}
+													</div>
 												))}
 											</div>
 										</div>
@@ -655,10 +749,23 @@ const Index = () => {
 						<div className="scroll-trigger opacity-0">
 							<form onSubmit={handleSubmit} className="space-y-8">
 								{[
-									{ id: "name", label: "Your Name", type: "text", value: formData.name },
-									{ id: "email", label: "Your Email", type: "email", value: formData.email }
+									{
+										id: "name",
+										label: "Your Name",
+										type: "text",
+										value: formData.name,
+									},
+									{
+										id: "email",
+										label: "Your Email",
+										type: "email",
+										value: formData.email,
+									},
 								].map((field, index) => (
-									<div key={field.id} className="relative scroll-trigger opacity-0">
+									<div
+										key={field.id}
+										className="relative scroll-trigger opacity-0"
+									>
 										<input
 											type={field.type}
 											placeholder=" "
@@ -745,22 +852,49 @@ const Index = () => {
 								<span className="text-2xl font-bold">HACHI AGENCY</span>
 							</div>
 							<p className="text-white mb-6">
-								Creating digital experiences that drive success for businesses
-								worldwide.
+								Your Success Is Our Success
 							</p>
 						</div>
 						{[
-							{ title: "Services", links: ["Web Development", "Mobile Design", "SEO Optimization", "E-commerce"] },
-							{ title: "Company", links: ["About Us", "Portfolio", "Careers", "Contact"] },
-							{ title: "Connect", links: ["Twitter", "LinkedIn", "Instagram", "GitHub"] }
+							// {
+							// 	title: "Services",
+							// 	links: [
+							// 		"Web Development",
+							// 		"Mobile Design",
+							// 		"SEO Optimization",
+							// 		"E-commerce",
+							// 	],
+							// },
+							{
+								title: "Company",
+								linkData: [{
+									title: "About Us",
+									url: "#about",
+								},
+								{
+									title: "Blog",
+									url: "#blog",
+								}, 
+								{
+									title: "Privacy Policy",
+									url: "#privacy-policy",
+								}],
+							},
+							// {
+							// 	title: "Connect",
+							// 	links: ["Twitter", "LinkedIn", "Instagram", "GitHub"],
+							// },
 						].map((section, index) => (
 							<div key={section.title} className="scroll-trigger opacity-0">
 								<h4 className="text-lg font-semibold mb-6">{section.title}</h4>
 								<ul className="space-y-2 text-white">
-									{section.links.map((link, linkIndex) => (
+									{section.linkData.map((link, linkIndex) => (
 										<li key={link}>
-											<a href="#" className="hover:text-[#38B6FF] transition-all duration-300 transform hover:translate-x-1 inline-block scroll-trigger opacity-0">
-												{link}
+											<a
+												href={link.url}
+												className="hover:text-[#38B6FF] transition-all duration-300 transform hover:translate-x-1 inline-block scroll-trigger opacity-0"
+											>
+												{link.title}
 											</a>
 										</li>
 									))}

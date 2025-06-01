@@ -83,7 +83,7 @@ const WorkingProcess = () => {
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-6 md:mb-8 px-4">
             We follow a structured approach to deliver exceptional results
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4 px-4">
+          {/* <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4 px-4">
             <Button className="bg-[#38B6FF] hover:bg-white hover:text-black text-white rounded-full px-4 md:px-6 py-2 md:py-3 transition-all duration-300 text-sm md:text-base relative overflow-hidden group">
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
               <Play className="w-4 h-4 md:w-5 md:h-5 mr-2" />
@@ -94,7 +94,7 @@ const WorkingProcess = () => {
               Let's get Started
               <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2" />
             </Button>
-          </div>
+          </div> */}
         </div>
 
         {/* Process Timeline */}
@@ -121,7 +121,6 @@ const WorkingProcess = () => {
                 className={`flex flex-col items-center w-64 scroll-trigger opacity-0 ${
                   step.position === "top" ? "mb-20" : "mt-20"
                 }`}
-                style={{ animationDelay: `${index * 0.2}s` }}
               >
                 {/* Step circle with pulse effect */}
                 <div className="relative">
@@ -201,6 +200,11 @@ const WorkingProcess = () => {
                 </div>
               </div>
             ))}
+
+
+
+
+            
           </div>
         </div>
 
@@ -214,7 +218,7 @@ const WorkingProcess = () => {
               <div className="absolute inset-0 bg-[#38B6FF] rounded-full animate-ping opacity-40" />
             </div>
             <span className="text-xs md:text-sm text-muted-foreground font-medium relative z-10">
-              End-to-end process management
+              GET YOUR FREE PREVIEW
             </span>
             
             {/* Floating sparkles */}

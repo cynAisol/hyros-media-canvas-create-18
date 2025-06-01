@@ -1,49 +1,18 @@
 
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Check } from "lucide-react";
 
 const WhyUs = () => {
   const benefits = [
-    {
-      number: "01",
-      title: "Increase speed to market",
-      description: "Get your product launched faster with our streamlined development process and proven methodologies.",
-      color: "bg-[#38B6FF]",
-      lineColor: "border-[#38B6FF]",
-      bgGradient: "from-[#38B6FF]/10 to-[#38B6FF]/20"
-    },
-    {
-      number: "02", 
-      title: "Reduce development cost",
-      description: "Save up to 40% on development costs through efficient workflows and reusable components.",
-      color: "bg-white",
-      lineColor: "border-white",
-      bgGradient: "from-white/10 to-white/20"
-    },
-    {
-      number: "03",
-      title: "Assure information security", 
-      description: "Enterprise-grade security measures to protect your data and user information at all times.",
-      color: "bg-[#38B6FF]",
-      lineColor: "border-[#38B6FF]",
-      bgGradient: "from-[#38B6FF]/10 to-[#38B6FF]/20"
-    },
-    {
-      number: "04",
-      title: "Get high-quality software",
-      description: "Clean, maintainable code with comprehensive testing and quality assurance processes.",
-      color: "bg-white",
-      lineColor: "border-white",
-      bgGradient: "from-white/10 to-white/20"
-    },
-    {
-      number: "05",
-      title: "Scale team up and down",
-      description: "Flexible team scaling to match your project needs and budget requirements.",
-      color: "bg-[#38B6FF]", 
-      lineColor: "border-[#38B6FF]",
-      bgGradient: "from-[#38B6FF]/10 to-[#38B6FF]/20"
-    }
+    "UX/UI that keeps users engaged",
+    "Custom Design",
+    "Speed Optimized",
+    "Mobile Optimized",
+    "Conversion Optimized",
+    "Unlimited Revisions",
+    "Fast Delivery",
+    "24/7 Support"
   ];
 
   return (
@@ -76,7 +45,7 @@ const WhyUs = () => {
           <span className="absolute -left-8 top-2 text-3xl">💡</span>
           <Badge className="mb-4 bg-[#38B6FF] text-white border-0">Why Choose Us</Badge>
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-2 flex items-center justify-center gap-2">
-            <span>Why *HACHI MEDIA</span>
+            <span>WHY CHOOSE US</span>
             <span className="text-3xl">🌟</span>
           </h2>
           <div className="text-muted-foreground text-lg mb-4 max-w-2xl mx-auto">Your partner for speed, security, and innovation in digital transformation</div>
@@ -111,78 +80,28 @@ const WhyUs = () => {
           <span className="absolute -right-8 top-2 text-3xl">🦄</span>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {benefits.map((benefit, index) => (
-            <div key={index} className="relative group">
-              <div className={`bg-gradient-to-br ${benefit.bgGradient} rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 min-h-[280px] flex flex-col justify-between border border-border backdrop-blur-sm group-hover:-translate-y-2`}>
-                <div>
-                  <div className={`inline-flex items-center justify-center w-12 h-12 ${benefit.color} ${benefit.color === 'bg-white' ? 'text-black' : 'text-white'} text-lg font-bold rounded-xl mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                    {benefit.number}
-                  </div>
-                  <h3 className="text-xl font-bold text-foreground mb-4 leading-tight group-hover:text-[#38B6FF] transition-colors">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                    {benefit.description}
-                  </p>
+        <div className="max-w-4xl mx-auto bg-gradient-to-br from-[#38B6FF]/10 to-[#38B6FF]/20 rounded-2xl p-8 shadow-lg border border-[#38B6FF]/30 backdrop-blur-sm">
+          <div className="grid md:grid-cols-2 gap-6">
+            {benefits.map((benefit, index) => (
+              <div key={`benefit-${benefit.replace(/\s+/g, '-').toLowerCase()}-${index}`} className="flex items-start gap-3 group">
+                <div className="w-6 h-6 bg-[#38B6FF] rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-md mt-0.5">
+                  <Check className="w-4 h-4 text-white" />
                 </div>
-                
-                {/* Enhanced horizontal line with gradient */}
-                <div className={`w-full h-1 ${benefit.color.replace('bg-', 'bg-gradient-to-r from-')} rounded-full`}></div>
-              </div>
-              
-              {/* Subtle glow effect */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${benefit.bgGradient} rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10 blur-xl`}></div>
-            </div>
-          ))}
-          
-          {/* Enhanced Exclusive Delivery Framework card */}
-          <div className="relative group">
-            <div className="bg-gradient-to-br from-[#38B6FF]/10 via-card to-[#38B6FF]/20 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 min-h-[280px] flex flex-col justify-between group cursor-pointer border border-[#38B6FF] backdrop-blur-sm group-hover:-translate-y-2">
-              <div>
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-[#38B6FF] text-white text-lg font-bold rounded-xl mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                  ⚡
-                </div>
-                <h3 className="text-xl font-bold text-[#38B6FF] mb-4 leading-tight group-hover:text-white transition-colors">
-                  Exclusive Delivery Framework
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                  Our proprietary methodology ensures consistent, high-quality results across all projects with proven success metrics.
+                <p className="text-foreground text-lg font-medium group-hover:text-[#38B6FF] transition-colors">
+                  {benefit}
                 </p>
               </div>
-              
-              <div className="flex items-center justify-between">
-                <div className="flex-1 h-1 bg-gradient-to-r from-[#38B6FF] to-white rounded-full mr-4"></div>
-                <div className="w-12 h-12 bg-[#38B6FF] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <ArrowRight className="w-6 h-6 text-white group-hover:translate-x-1 transition-transform" />
-                </div>
-              </div>
-            </div>
-            
-            {/* Glow effect for exclusive card */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#38B6FF]/20 to-white/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-xl"></div>
+            ))}
+          </div>
+          
+          <div className="mt-10 flex justify-center">
+            <Button className="bg-[#38B6FF] hover:bg-[#38B6FF]/80 text-white font-bold py-3 px-8 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              GET YOUR FREE PREVIEW
+            </Button>
           </div>
         </div>
       </div>
       
-      {/* Enhanced Fun Fact Card */}
-      <div className="flex justify-center mt-16">
-        <div className="bg-card/80 backdrop-blur-sm rounded-2xl shadow-xl p-8 max-w-lg text-left border border-border relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#38B6FF] via-white to-[#38B6FF]"></div>
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 bg-[#38B6FF] rounded-xl flex items-center justify-center flex-shrink-0">
-              <span className="text-2xl">💡</span>
-            </div>
-            <div>
-              <div className="text-[#38B6FF] font-bold mb-2 text-lg">Did you know?</div>
-              <div className="text-foreground leading-relaxed">
-                HACHI MEDIA has helped over <span className='font-bold text-[#38B6FF]'>49+</span> businesses launch their digital presence with a 
-                <span className='font-bold text-white'> 98%</span> client satisfaction rate and <span className='font-bold text-[#38B6FF]'>zero</span> security breaches!
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
   );
 };
