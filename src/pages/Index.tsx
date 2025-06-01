@@ -663,7 +663,7 @@ const Index = () => {
 						<Badge className="mb-6 bg-[#38B6FF] text-white border-0 scroll-trigger opacity-0">
 							Get In Touch
 						</Badge>
-						<h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6 scroll-trigger opacity-0">
+						<h2 className="text-4xl all-cap md:text-5xl font-bold text-foreground mb-6 scroll-trigger opacity-0">
 							Ready to Start Your Project?
 						</h2>
 						<p className="text-xl text-foreground max-w-3xl mx-auto mb-8 scroll-trigger opacity-0">

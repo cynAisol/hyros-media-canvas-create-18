@@ -86,7 +86,7 @@ const Testimonials = () => {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-black mb-6 all-cap">
             Trusted by Professionals
           </h2>
           <p className="text-lg text-black max-w-4xl mx-auto">

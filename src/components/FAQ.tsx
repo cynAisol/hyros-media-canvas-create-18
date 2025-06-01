@@ -65,7 +65,7 @@ const FAQ = () => {
 				<div className="text-center mb-16 flex flex-col items-center relative">
 					<span className="absolute -left-8 top-2 text-3xl">❓</span>
 					{/* <Badge className="mb-4 bg-[#38B6FF] text-white">FAQ</Badge> */}
-					<h2 className="text-4xl md:text-5xl font-bold text-foreground mb-2 flex items-center justify-center gap-2">
+					<h2 className="text-4xl all-cap md:text-5xl font-bold text-foreground mb-2 flex items-center justify-center gap-2">
 						<span>Frequently Asked Questions</span>
 						<span className="text-3xl">🤔</span>
 					</h2>
