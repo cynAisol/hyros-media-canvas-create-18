@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -31,7 +32,7 @@ import {
 	Play,
 	CheckCircle,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import WorkingProcess from "@/components/WorkingProcess";
 import StrategicPartners from "@/components/StrategicPartners";
 import WhyUs from "@/components/WhyUs";
@@ -39,6 +40,7 @@ import FAQ from "@/components/FAQ";
 import TypingAnimation from "@/components/TypingAnimation";
 import Testimonials from "@/components/Testimonials";
 import AnimatedBlob from "@/components/AnimatedBlob";
+import FloatingElements from "@/components/FloatingElements";
 
 const Index = () => {
 	const [formData, setFormData] = useState({
@@ -46,6 +48,73 @@ const Index = () => {
 		email: "",
 		message: "",
 	});
+
+	// Counter animation hook
+	const useCountAnimation = (end: number, duration: number = 2000, suffix: string = '') => {
+		const [count, setCount] = useState(0);
+		const [hasAnimated, setHasAnimated] = useState(false);
+		const countRef = useRef<HTMLDivElement>(null);
+
+		useEffect(() => {
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting && !hasAnimated) {
+						setHasAnimated(true);
+						let startTime: number;
+						const animate = (currentTime: number) => {
+							if (!startTime) startTime = currentTime;
+							const progress = Math.min((currentTime - startTime) / duration, 1);
+							
+							// Easing function for smooth animation
+							const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+							setCount(Math.floor(easeOutQuart * end));
+							
+							if (progress < 1) {
+								requestAnimationFrame(animate);
+							} else {
+								setCount(end);
+							}
+						};
+						requestAnimationFrame(animate);
+					}
+				});
+			}, { threshold: 0.3 });
+
+			if (countRef.current) {
+				observer.observe(countRef.current);
+			}
+
+			return () => observer.disconnect();
+		}, [end, duration, hasAnimated]);
+
+		return { count, countRef, displayValue: `${count}${suffix}` };
+	};
+
+	// Improved scroll trigger animation hook
+	useEffect(() => {
+		const observerOptions = {
+			threshold: 0.2,
+			rootMargin: '0px 0px -50px 0px'
+		};
+
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					if (!entry.target.classList.contains('animated')) {
+						entry.target.classList.add('animate-fade-in');
+						entry.target.classList.remove('opacity-0');
+						entry.target.classList.add('animated');
+					}
+				}
+			});
+		}, observerOptions);
+
+		// Observe all elements with scroll-trigger class
+		const elements = document.querySelectorAll('.scroll-trigger');
+		elements.forEach((el) => observer.observe(el));
+
+		return () => observer.disconnect();
+	}, []);
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
@@ -126,78 +195,63 @@ const Index = () => {
 		"Vision to Life",
 	];
 
+	// Counter hooks for stats
+	const projectsCount = useCountAnimation(49, 2000, '+');
+	const satisfactionCount = useCountAnimation(98, 2000, '%');
+	const experienceCount = useCountAnimation(5, 2000, '+');
+
 	return (
-		<div className="min-h-screen bg-white">
+		<div className="min-h-screen bg-background">
 			{/* Navigation */}
-			<nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b border-black">
+			<nav className="fixed top-0 w-full bg-background/95 backdrop-blur-sm z-50 border-b border-border">
 				<div className="container mx-auto px-4 py-4">
 					<div className="flex items-center justify-between">
 						<div className="flex items-center space-x-2">
 							<div className="w-8 h-8 bg-[#38B6FF] rounded-lg"></div>
-							<span className="text-2xl font-bold text-black">
+							<span className="text-2xl font-bold text-foreground">
 								HACHI AGENCY
 							</span>
 						</div>
 						<div className="hidden md:flex items-center space-x-8">
-							<a
-								href="#home"
-								className="text-black hover:text-[#38B6FF] transition-colors"
-							>
-								Home
-							</a>
-							<a
-								href="#services"
-								className="text-black hover:text-[#38B6FF] transition-colors"
-							>
-								Services
-							</a>
-							<a
-								href="#portfolio"
-								className="text-black hover:text-[#38B6FF] transition-colors"
-							>
-								Portfolio
-							</a>
-							<a
-								href="#about"
-								className="text-black hover:text-[#38B6FF] transition-colors"
-							>
-								About
-							</a>
-							<a
-								href="#contact"
-								className="text-black hover:text-[#38B6FF] transition-colors"
-							>
-								Contact
-							</a>
+							{['Home', 'Services', 'Portfolio', 'About', 'Contact'].map((item) => (
+								<a
+									key={item}
+									href={`#${item.toLowerCase()}`}
+									className="text-foreground hover:text-[#38B6FF] transition-all duration-300 transform hover:scale-110"
+								>
+									{item}
+								</a>
+							))}
 						</div>
 					</div>
 				</div>
 			</nav>
 
-			{/* Enhanced Hero Section with Animated Blobs */}
+			{/* Enhanced Hero Section - NO SCROLL TRIGGERS */}
 			<section
 				id="home"
-				className="pt-20 min-h-screen relative overflow-hidden bg-white"
+				className="pt-20 min-h-screen relative overflow-hidden bg-background"
 			>
 				{/* Animated Blobs for Hero */}
 				<AnimatedBlob size="large" color="blue" position="top-left" delay={0} />
-				<AnimatedBlob size="medium" color="black" position="top-right" delay={2} />
+				<AnimatedBlob size="medium" color="white" position="top-right" delay={2} />
 				<AnimatedBlob size="small" color="blue" position="bottom-left" delay={4} />
 				<AnimatedBlob size="medium" color="white" position="bottom-right" delay={1} />
+				<FloatingElements />
 
 				<div className="relative z-10 container mx-auto px-4 py-20">
 					<div className="grid lg:grid-cols-2 gap-16 items-center">
 						<div className="space-y-8">
-							{/* Badge with enhanced styling */}
-							<div className="animate-fade-in">
+							{/* Badge with enhanced styling - NO SCROLL TRIGGER */}
+							<div>
 								<Badge className="bg-[#38B6FF] text-white border-0 px-4 py-2 text-sm font-medium">
 									✨ #1 Premium Web Agency
 								</Badge>
 							</div>
 
-							{/* Main Headline */}
-							<div className="animate-fade-in space-y-4">
-								<h1 className="text-5xl md:text-7xl font-bold text-black leading-tight">
+							{/* Main Headline - NO SCROLL TRIGGER */}
+							<div className="space-y-4">
+								<h1 className="text-5xl md:text-7xl font-bold text-foreground leading-tight">
 									Build Your
 									<br />
 									<span className="text-[#38B6FF]">
@@ -212,45 +266,45 @@ const Index = () => {
 								</h1>
 							</div>
 
-							{/* Enhanced Description */}
-							<div className="animate-fade-in space-y-6">
-								<p className="text-xl md:text-2xl text-black max-w-2xl leading-relaxed">
+							{/* Enhanced Description - NO SCROLL TRIGGER */}
+							<div className="space-y-6">
+								<p className="text-xl md:text-2xl text-foreground max-w-2xl leading-relaxed">
 									We create{" "}
-									<span className="font-semibold text-black">
+									<span className="font-semibold text-foreground">
 										stunning, high-performance websites
 									</span>{" "}
 									that drive real results for your business. From concept to
 									launch, we're your digital transformation partners.
 								</p>
 
-								{/* Key Benefits */}
+								{/* Updated Key Benefits with new colors */}
 								<div className="flex flex-wrap gap-4">
-									<div className="flex items-center gap-2 bg-white border border-black px-3 py-2 rounded-full">
+									<div className="flex items-center gap-2 bg-card border border-[#38B6FF] px-3 py-2 rounded-full">
 										<CheckCircle className="w-4 h-4 text-[#38B6FF]" />
-										<span className="text-sm font-medium text-black">
+										<span className="text-sm font-medium text-foreground">
 											Fast Delivery
 										</span>
 									</div>
-									<div className="flex items-center gap-2 bg-white border border-black px-3 py-2 rounded-full">
-										<CheckCircle className="w-4 h-4 text-[#38B6FF]" />
-										<span className="text-sm font-medium text-black">
+									<div className="flex items-center gap-2 bg-card border border-white px-3 py-2 rounded-full">
+										<CheckCircle className="w-4 h-4 text-white" />
+										<span className="text-sm font-medium text-foreground">
 											24/7 Support
 										</span>
 									</div>
-									<div className="flex items-center gap-2 bg-white border border-black px-3 py-2 rounded-full">
+									<div className="flex items-center gap-2 bg-card border border-[#38B6FF] px-3 py-2 rounded-full">
 										<CheckCircle className="w-4 h-4 text-[#38B6FF]" />
-										<span className="text-sm font-medium text-black">
+										<span className="text-sm font-medium text-foreground">
 											100% Satisfaction
 										</span>
 									</div>
 								</div>
 							</div>
 
-							{/* Enhanced CTAs */}
-							<div className="flex flex-col sm:flex-row gap-4 animate-fade-in">
+							{/* Enhanced CTAs - NO SCROLL TRIGGER */}
+							<div className="flex flex-col sm:flex-row gap-4">
 								<Button
 									size="lg"
-									className="bg-[#38B6FF] hover:bg-black text-white text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+									className="bg-[#38B6FF] hover:bg-white hover:text-black text-white text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
 								>
 									Start Your Project
 									<ArrowRight className="ml-2 w-5 h-5" />
@@ -258,28 +312,28 @@ const Index = () => {
 								<Button
 									size="lg"
 									variant="outline"
-									className="border-2 border-black hover:border-[#38B6FF] text-black hover:text-[#38B6FF] text-lg px-8 py-6 transition-all duration-300 group"
+									className="border-2 border-white hover:border-[#38B6FF] text-white hover:text-[#38B6FF] text-lg px-8 py-6 transition-all duration-300 group"
 								>
 									<Play className="mr-2 w-5 h-5 group-hover:text-[#38B6FF]" />
 									Watch Demo
 								</Button>
 							</div>
 
-							{/* Social Proof */}
-							<div className="animate-fade-in pt-4">
+							{/* Social Proof - NO SCROLL TRIGGER */}
+							<div className="pt-4">
 								<div className="flex items-center gap-6">
 									<div className="flex items-center gap-2">
 										<div className="flex -space-x-2">
 											<div className="w-8 h-8 bg-[#38B6FF] rounded-full border-2 border-white"></div>
-											<div className="w-8 h-8 bg-black rounded-full border-2 border-white"></div>
+											<div className="w-8 h-8 bg-white rounded-full border-2 border-white"></div>
 											<div className="w-8 h-8 bg-[#38B6FF] rounded-full border-2 border-white"></div>
-											<div className="w-8 h-8 bg-black rounded-full border-2 border-white flex items-center justify-center">
-												<span className="text-xs font-bold text-white">
+											<div className="w-8 h-8 bg-white rounded-full border-2 border-white flex items-center justify-center">
+												<span className="text-xs font-bold text-black">
 													+
 												</span>
 											</div>
 										</div>
-										<span className="text-sm text-black font-medium">
+										<span className="text-sm text-foreground font-medium">
 											50+ Happy Clients
 										</span>
 									</div>
@@ -290,7 +344,7 @@ const Index = () => {
 												className="w-4 h-4 fill-[#38B6FF] text-[#38B6FF]"
 											/>
 										))}
-										<span className="text-sm text-black ml-1">
+										<span className="text-sm text-foreground ml-1">
 											4.9/5 Rating
 										</span>
 									</div>
@@ -298,11 +352,11 @@ const Index = () => {
 							</div>
 						</div>
 
-						{/* Enhanced Visual Section */}
-						<div className="relative animate-fade-in">
+						{/* Enhanced Visual Section - NO SCROLL TRIGGER */}
+						<div className="relative">
 							<div className="relative">
 								{/* Main Image with enhanced styling */}
-								<div className="relative overflow-hidden rounded-3xl shadow-2xl bg-white border-2 border-black p-8">
+								<div className="relative overflow-hidden rounded-3xl shadow-2xl bg-card border-2 border-border p-8">
 									<img
 										src="https://d1hdtc0tbqeghx.cloudfront.net/wp-content/uploads/2024/02/29110639/Web-Design-and-Development-agency-Digital-Transformation.webp"
 										alt="Digital Transformation"
@@ -311,38 +365,35 @@ const Index = () => {
 									/>
 
 									{/* Floating elements */}
-									<div className="absolute -top-4 -left-4 w-20 h-20 bg-[#38B6FF] rounded-2xl opacity-80 animate-pulse"></div>
-									<div
-										className="absolute -bottom-4 -right-4 w-16 h-16 bg-black rounded-xl opacity-60 animate-pulse"
-										style={{ animationDelay: "1s" }}
-									></div>
+									<div className="absolute -top-4 -left-4 w-20 h-20 bg-[#38B6FF] rounded-2xl opacity-80"></div>
+									<div className="absolute -bottom-4 -right-4 w-16 h-16 bg-white rounded-xl opacity-60"></div>
 								</div>
 
 								{/* Stats Cards */}
-								<div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-lg border border-black">
+								<div className="absolute -bottom-6 -left-6 bg-card p-6 rounded-2xl shadow-lg border border-border">
 									<div className="flex items-center space-x-4">
 										<div className="w-12 h-12 bg-[#38B6FF] rounded-xl flex items-center justify-center">
 											<Zap className="w-6 h-6 text-white" />
 										</div>
 										<div>
-											<div className="font-bold text-black text-lg">
+											<div className="font-bold text-foreground text-lg">
 												Lightning Fast
 											</div>
-											<div className="text-black">99.9% Uptime</div>
+											<div className="text-foreground">99.9% Uptime</div>
 										</div>
 									</div>
 								</div>
 
-								<div className="absolute -top-6 -right-6 bg-white p-6 rounded-2xl shadow-lg border border-black">
+								<div className="absolute -top-6 -right-6 bg-card p-6 rounded-2xl shadow-lg border border-border">
 									<div className="flex items-center space-x-4">
 										<div className="w-12 h-12 bg-[#38B6FF] rounded-xl flex items-center justify-center">
 											<Award className="w-6 h-6 text-white" />
 										</div>
 										<div>
-											<div className="font-bold text-black text-lg">
+											<div className="font-bold text-foreground text-lg">
 												Award Winning
 											</div>
-											<div className="text-black">Design Agency</div>
+											<div className="text-foreground">Design Agency</div>
 										</div>
 									</div>
 								</div>
@@ -358,65 +409,99 @@ const Index = () => {
 			{/* Benefits/Why US Section */}
 			<WhyUs />
 
-			{/* Portfolio Section with Animated Blobs */}
+			{/* Portfolio Section - NO SCROLL TRIGGERS */}
 			<section
 				id="portfolio"
-				className="py-20 bg-white relative overflow-hidden"
+				className="py-20 bg-background relative overflow-hidden"
 			>
 				{/* Animated Blobs for Portfolio */}
-				<AnimatedBlob size="large" color="black" position="top-right" delay={1} />
+				<AnimatedBlob size="large" color="white" position="top-right" delay={1} />
 				<AnimatedBlob size="medium" color="blue" position="bottom-left" delay={3} />
 				<AnimatedBlob size="small" color="white" position="center" delay={5} />
+				<FloatingElements />
 
 				<div className="container mx-auto px-4 relative z-10">
 					<div className="text-center mb-16 flex flex-col items-center relative">
-						<span className="absolute -left-8 top-2 text-3xl">💼</span>
 						<Badge className="mb-4 bg-[#38B6FF] text-white">Our Work</Badge>
-						<h2 className="text-4xl md:text-5xl font-bold text-black mb-2 flex items-center justify-center gap-2">
+						<h2 className="text-4xl md:text-5xl font-bold text-foreground mb-2 flex items-center justify-center gap-2">
 							<span>Portfolio Highlights</span>
-							<span className="text-3xl">🎨</span>
 						</h2>
-						<p className="text-xl text-black max-w-3xl mx-auto mb-4">
+						<p className="text-xl text-foreground max-w-3xl mx-auto mb-4">
 							Discover some of our recent projects that showcase our expertise
 							and creativity.
 						</p>
-						<span className="absolute -right-8 top-2 text-3xl">✨</span>
 					</div>
 					<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 						{portfolioItems.map((item, index) => (
-							<a href={item.url} key={index}>
-								<Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 border-black">
-									<div className="relative overflow-hidden">
+							<a href={item.url} key={index} className="group">
+								<Card className="group overflow-hidden transition-all duration-500 border-border bg-card transform hover:scale-[1.02] hover:shadow-2xl relative">
+									{/* Animated border gradient */}
+									<div className="absolute inset-0 bg-gradient-to-r from-[#38B6FF]/20 via-transparent to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg"></div>
+									
+									<div className="relative overflow-hidden rounded-t-lg">
 										<img
 											src={item.image}
 											alt={item.title}
-											className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
+											className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
 										/>
-										<div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-									</div>
-									<CardHeader>
-										<div className="flex items-center justify-between">
-											<Badge className="bg-black text-white">{item.category}</Badge>
-											<ArrowRight className="w-5 h-5 text-black group-hover:text-[#38B6FF] transition-colors" />
+										{/* Overlay with animated elements */}
+										<div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+											<div className="text-white text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+												<div className="text-lg font-semibold mb-2">View Project</div>
+												<div className="w-12 h-0.5 bg-[#38B6FF] mx-auto"></div>
+											</div>
 										</div>
-										<CardTitle className="group-hover:text-[#38B6FF] transition-colors text-black">
-											{item.title}
-										</CardTitle>
+										
+										{/* Floating badge */}
+										<div className="absolute top-4 right-4 transform translate-x-8 group-hover:translate-x-0 transition-transform duration-500">
+											<Badge className="bg-[#38B6FF]/90 text-white backdrop-blur-sm">
+												{item.category}
+											</Badge>
+										</div>
+									</div>
+									
+									<CardHeader className="relative">
+										{/* Animated background pattern */}
+										<div className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500">
+											<div className="w-full h-full bg-gradient-to-br from-[#38B6FF] to-white"></div>
+										</div>
+										
+										<div className="flex items-center justify-between relative z-10">
+											<div className="space-y-2">
+												<CardTitle className="group-hover:text-[#38B6FF] transition-colors duration-300 text-foreground text-xl">
+													{item.title}
+												</CardTitle>
+												<div className="flex items-center gap-2 text-sm text-muted-foreground">
+													<div className="w-2 h-2 bg-[#38B6FF] rounded-full"></div>
+													<span>Click to explore</span>
+												</div>
+											</div>
+											<ArrowRight className="w-6 h-6 text-foreground group-hover:text-[#38B6FF] transition-all duration-300 transform group-hover:translate-x-1 group-hover:scale-110" />
+										</div>
+										
+										{/* Progress bar animation */}
+										<div className="mt-4 h-1 bg-border rounded-full overflow-hidden">
+											<div className="h-full bg-gradient-to-r from-[#38B6FF] to-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-1000 ease-out"></div>
+										</div>
 									</CardHeader>
 								</Card>
 							</a>
 						))}
 					</div>
-					{/* Portfolio Showcase Card */}
+					{/* Enhanced Portfolio Showcase Card */}
 					<div className="flex justify-center mt-12">
-						<div className="bg-white rounded-xl shadow-lg p-6 max-w-lg text-left border border-black">
-							<div className="text-[#38B6FF] font-bold mb-2 flex items-center gap-2">
-								<span>🎯</span>
-								<span>Showcase Highlight</span>
-							</div>
-							<div className="text-black">
-								Each project represents our commitment to quality, innovation,
-								and client success. Ready to see your vision come to life?
+						<div className="bg-card rounded-xl shadow-lg p-6 max-w-lg text-left border border-border hover:shadow-2xl transform hover:scale-105 transition-all duration-500 relative overflow-hidden">
+							{/* Animated background */}
+							<div className="absolute inset-0 bg-gradient-to-r from-[#38B6FF]/5 to-white/5"></div>
+							<div className="relative z-10">
+								<div className="text-[#38B6FF] font-bold mb-2 flex items-center gap-2">
+									<span>🎯</span>
+									<span>Showcase Highlight</span>
+								</div>
+								<div className="text-foreground">
+									Each project represents our commitment to quality, innovation,
+									and client success. Ready to see your vision come to life?
+								</div>
 							</div>
 						</div>
 					</div>
@@ -426,62 +511,63 @@ const Index = () => {
 			{/* Working Process Section */}
 			<WorkingProcess />
 
-			{/* About Section with Animated Blobs */}
-			<section id="about" className="py-20 bg-white relative overflow-hidden">
+			{/* Enhanced About Section with Animated Counters */}
+			<section id="about" className="py-20 bg-background relative overflow-hidden">
 				{/* Animated Blobs for About */}
 				<AnimatedBlob size="medium" color="blue" position="top-left" delay={0} />
-				<AnimatedBlob size="large" color="black" position="bottom-right" delay={2} />
+				<AnimatedBlob size="large" color="white" position="bottom-right" delay={2} />
 				<AnimatedBlob size="small" color="white" position="top-right" delay={4} />
+				<FloatingElements />
 
 				<div className="container mx-auto px-4 relative z-10">
 					<div className="grid lg:grid-cols-2 gap-16 items-center">
-						<div>
+						<div className="scroll-trigger opacity-0">
 							<Badge className="mb-4 bg-[#38B6FF] text-white">About Us</Badge>
-							<h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
+							<h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
 								Crafting Digital Excellence Since Day One
 							</h2>
-							<p className="text-lg text-black mb-8">
+							<p className="text-lg text-foreground mb-8">
 								At HACHI AGENCY, we're passionate about creating digital
 								experiences that matter. Our team of skilled developers,
 								designers, and strategists work together to bring your vision to
 								life with cutting-edge technology and creative innovation.
 							</p>
 							<div className="grid grid-cols-3 gap-8 mb-8">
-								<div className="text-center">
+								<div ref={projectsCount.countRef} className="text-center transform hover:scale-110 transition-transform duration-300">
 									<div className="text-3xl font-bold text-[#38B6FF] mb-2">
-										49+
+										{projectsCount.displayValue}
 									</div>
-									<div className="text-black">Projects Completed</div>
+									<div className="text-foreground">Projects Completed</div>
 								</div>
-								<div className="text-center">
+								<div ref={satisfactionCount.countRef} className="text-center transform hover:scale-110 transition-transform duration-300">
 									<div className="text-3xl font-bold text-[#38B6FF] mb-2">
-										98%
+										{satisfactionCount.displayValue}
 									</div>
-									<div className="text-black">Client Satisfaction</div>
+									<div className="text-foreground">Client Satisfaction</div>
 								</div>
-								<div className="text-center">
+								<div ref={experienceCount.countRef} className="text-center transform hover:scale-110 transition-transform duration-300">
 									<div className="text-3xl font-bold text-[#38B6FF] mb-2">
-										5+
+										{experienceCount.displayValue}
 									</div>
-									<div className="text-black">Years Experience</div>
+									<div className="text-foreground">Years Experience</div>
 								</div>
 							</div>
-							<Button className="bg-[#38B6FF] hover:bg-black text-white">
+							<Button className="bg-[#38B6FF] hover:bg-white hover:text-black text-white transform hover:scale-105 transition-all duration-300">
 								Learn More About Us
 							</Button>
 						</div>
-						<div className="relative">
+						<div className="relative scroll-trigger opacity-0">
 							<img
 								src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
 								alt="Team working"
-								className="rounded-2xl shadow-2xl"
+								className="rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500"
 							/>
-							<div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-lg border border-black">
+							<div className="absolute -bottom-6 -left-6 bg-card p-6 rounded-xl shadow-lg border border-border">
 								<div className="flex items-center space-x-4">
 									<Award className="w-8 h-8 text-[#38B6FF]" />
 									<div>
-										<div className="font-bold text-black">Award Winning</div>
-										<div className="text-black">Design Agency</div>
+										<div className="font-bold text-foreground">Award Winning</div>
+										<div className="text-foreground">Design Agency</div>
 									</div>
 								</div>
 							</div>
@@ -496,162 +582,115 @@ const Index = () => {
 			{/* FAQ Section */}
 			<FAQ />
 
-			{/* Contact Section - Clean Design */}
+			{/* Enhanced Contact Section */}
 			<section
 				id="contact"
-				className="py-20 bg-white"
+				className="py-20 bg-background relative overflow-hidden"
 			>
-				<div className="container mx-auto px-4">
+				<FloatingElements />
+				<div className="container mx-auto px-4 relative z-10">
 					{/* Header */}
 					<div className="text-center mb-16">
-						<Badge className="mb-6 bg-[#38B6FF] text-white border-0">
+						<Badge className="mb-6 bg-[#38B6FF] text-white border-0 scroll-trigger opacity-0">
 							Get In Touch
 						</Badge>
-						<h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
+						<h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6 scroll-trigger opacity-0">
 							Ready to Start Your Project?
 						</h2>
-						<p className="text-xl text-black max-w-3xl mx-auto mb-8">
+						<p className="text-xl text-foreground max-w-3xl mx-auto mb-8 scroll-trigger opacity-0">
 							Let's transform your vision into reality with cutting-edge
 							technology and creative excellence!
 						</p>
 
-						{/* Process Icons */}
+						{/* Enhanced Process Icons */}
 						<div className="flex justify-center gap-12 mb-8">
-							<div className="flex flex-col items-center">
-								<div className="w-12 h-12 bg-white border-2 border-black rounded-full flex items-center justify-center mb-2">
-									<Search className="w-6 h-6 text-[#38B6FF]" />
+							{[
+								{ icon: Search, label: "Discover" },
+								{ icon: Palette, label: "Design" },
+								{ icon: Laptop, label: "Develop" },
+								{ icon: Rocket, label: "Deliver" }
+							].map((item, index) => (
+								<div key={index} className="flex flex-col items-center scroll-trigger opacity-0 transform hover:scale-110 transition-all duration-300">
+									<div className="w-12 h-12 bg-card border-2 border-border rounded-full flex items-center justify-center mb-2 hover:border-[#38B6FF] transition-colors duration-300">
+										<item.icon className="w-6 h-6 text-[#38B6FF]" />
+									</div>
+									<span className="text-sm text-foreground font-medium">
+										{item.label}
+									</span>
 								</div>
-								<span className="text-sm text-black font-medium">
-									Discover
-								</span>
-							</div>
-							<div className="flex flex-col items-center">
-								<div className="w-12 h-12 bg-white border-2 border-black rounded-full flex items-center justify-center mb-2">
-									<Palette className="w-6 h-6 text-[#38B6FF]" />
-								</div>
-								<span className="text-sm text-black font-medium">
-									Design
-								</span>
-							</div>
-							<div className="flex flex-col items-center">
-								<div className="w-12 h-12 bg-white border-2 border-black rounded-full flex items-center justify-center mb-2">
-									<Laptop className="w-6 h-6 text-[#38B6FF]" />
-								</div>
-								<span className="text-sm text-black font-medium">
-									Develop
-								</span>
-							</div>
-							<div className="flex flex-col items-center">
-								<div className="w-12 h-12 bg-white border-2 border-black rounded-full flex items-center justify-center mb-2">
-									<Rocket className="w-6 h-6 text-[#38B6FF]" />
-								</div>
-								<span className="text-sm text-black font-medium">
-									Deliver
-								</span>
-							</div>
+							))}
 						</div>
 					</div>
 
 					<div className="grid lg:grid-cols-2 gap-16 items-start">
-						{/* Contact Information */}
-						<div className="space-y-8">
+						{/* Enhanced Contact Information */}
+						<div className="space-y-8 scroll-trigger opacity-0">
 							<div>
-								<h3 className="text-2xl font-bold text-black mb-8">
+								<h3 className="text-2xl font-bold text-foreground mb-8">
 									Contact Information
 								</h3>
 								<div className="space-y-6">
-									<div className="flex items-center space-x-4">
-										<div className="w-12 h-12 bg-[#38B6FF] rounded-lg flex items-center justify-center">
-											<Mail className="w-6 h-6 text-white" />
-										</div>
-										<div>
-											<div className="font-semibold text-black">Email</div>
-											<div className="text-black">
-												hachiagency.com@gmail.com
+									{[
+										{ icon: Mail, title: "Email", content: ["hachiagency.com@gmail.com", "contact@hachiagency.com"] },
+										{ icon: Phone, title: "Phone", content: ["+1 (555) 123-4567"] },
+										{ icon: MapPin, title: "Location", content: ["San Francisco, CA"] }
+									].map((item, index) => (
+										<div key={index} className="flex items-center space-x-4 transform hover:scale-105 transition-transform duration-300 scroll-trigger opacity-0">
+											<div className="w-12 h-12 bg-[#38B6FF] rounded-lg flex items-center justify-center">
+												<item.icon className="w-6 h-6 text-white" />
 											</div>
-											<div className="text-black">
-												contact@hachiagency.com
+											<div>
+												<div className="font-semibold text-foreground">{item.title}</div>
+												{item.content.map((text, i) => (
+													<div key={i} className="text-foreground">{text}</div>
+												))}
 											</div>
 										</div>
-									</div>
-									<div className="flex items-center space-x-4">
-										<div className="w-12 h-12 bg-[#38B6FF] rounded-lg flex items-center justify-center">
-											<Phone className="w-6 h-6 text-white" />
-										</div>
-										<div>
-											<div className="font-semibold text-black">Phone</div>
-											<div className="text-black">+1 (555) 123-4567</div>
-										</div>
-									</div>
-									<div className="flex items-center space-x-4">
-										<div className="w-12 h-12 bg-[#38B6FF] rounded-lg flex items-center justify-center">
-											<MapPin className="w-6 h-6 text-white" />
-										</div>
-										<div>
-											<div className="font-semibold text-black">
-												Location
-											</div>
-											<div className="text-black">San Francisco, CA</div>
-										</div>
-									</div>
+									))}
 								</div>
 							</div>
 						</div>
 
-						{/* Contact Form - Clean Design */}
-						<div>
+						{/* Enhanced Contact Form */}
+						<div className="scroll-trigger opacity-0">
 							<form onSubmit={handleSubmit} className="space-y-8">
-								<div className="relative">
-									<input
-										type="text"
-										placeholder=" "
-										value={formData.name}
-										onChange={(e) =>
-											setFormData({ ...formData, name: e.target.value })
-										}
-										className="peer w-full bg-transparent border-0 border-b-2 border-black focus:border-[#38B6FF] focus:outline-none py-3 px-0 text-black placeholder-transparent transition-colors duration-300"
-										id="name"
-									/>
-									<label
-										htmlFor="name"
-										className="absolute left-0 -top-6 text-black text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-black peer-placeholder-shown:top-3 peer-focus:-top-6 peer-focus:text-[#38B6FF] peer-focus:text-sm"
-									>
-										Your Name
-									</label>
-								</div>
+								{[
+									{ id: "name", label: "Your Name", type: "text", value: formData.name },
+									{ id: "email", label: "Your Email", type: "email", value: formData.email }
+								].map((field, index) => (
+									<div key={field.id} className="relative scroll-trigger opacity-0">
+										<input
+											type={field.type}
+											placeholder=" "
+											value={field.value}
+											onChange={(e) =>
+												setFormData({ ...formData, [field.id]: e.target.value })
+											}
+											className="peer w-full bg-transparent border-0 border-b-2 border-border focus:border-[#38B6FF] focus:outline-none py-3 px-0 text-foreground placeholder-transparent transition-all duration-300 hover:border-[#38B6FF]/50"
+											id={field.id}
+										/>
+										<label
+											htmlFor={field.id}
+											className="absolute left-0 -top-6 text-foreground text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-foreground peer-placeholder-shown:top-3 peer-focus:-top-6 peer-focus:text-[#38B6FF] peer-focus:text-sm"
+										>
+											{field.label}
+										</label>
+									</div>
+								))}
 
-								<div className="relative">
-									<input
-										type="email"
-										placeholder=" "
-										value={formData.email}
-										onChange={(e) =>
-											setFormData({ ...formData, email: e.target.value })
-										}
-										className="peer w-full bg-transparent border-0 border-b-2 border-black focus:border-[#38B6FF] focus:outline-none py-3 px-0 text-black placeholder-transparent transition-colors duration-300"
-										id="email"
-									/>
-									<label
-										htmlFor="email"
-										className="absolute left-0 -top-6 text-black text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-black peer-placeholder-shown:top-3 peer-focus:-top-6 peer-focus:text-[#38B6FF] peer-focus:text-sm"
-									>
-										Your Email
-									</label>
-								</div>
-
-								<div className="relative">
+								<div className="relative scroll-trigger opacity-0">
 									<textarea
 										placeholder=" "
 										value={formData.message}
 										onChange={(e) =>
 											setFormData({ ...formData, message: e.target.value })
 										}
-										className="peer w-full bg-transparent border-0 border-b-2 border-black focus:border-[#38B6FF] focus:outline-none py-3 px-0 text-black placeholder-transparent transition-colors duration-300 resize-none min-h-[100px]"
+										className="peer w-full bg-transparent border-0 border-b-2 border-border focus:border-[#38B6FF] focus:outline-none py-3 px-0 text-foreground placeholder-transparent transition-all duration-300 resize-none min-h-[100px] hover:border-[#38B6FF]/50"
 										id="message"
 									/>
 									<label
 										htmlFor="message"
-										className="absolute left-0 -top-6 text-black text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-black peer-placeholder-shown:top-3 peer-focus:-top-6 peer-focus:text-[#38B6FF] peer-focus:text-sm"
+										className="absolute left-0 -top-6 text-foreground text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-foreground peer-placeholder-shown:top-3 peer-focus:-top-6 peer-focus:text-[#38B6FF] peer-focus:text-sm"
 									>
 										Tell us about your project...
 									</label>
@@ -659,7 +698,7 @@ const Index = () => {
 
 								<Button
 									type="submit"
-									className="w-full h-14 bg-[#38B6FF] hover:bg-black text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 text-lg"
+									className="w-full h-14 bg-[#38B6FF] hover:bg-white hover:text-black text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 text-lg transform hover:scale-105 scroll-trigger opacity-0"
 								>
 									Send Message
 									<ArrowRight className="ml-2 w-5 h-5" />
@@ -671,8 +710,8 @@ const Index = () => {
 			</section>
 
 			{/* Call to Action Section - Boy Running as Full Background */}
-			<section
-				className="w-full py-20 bg-white flex items-center justify-center relative overflow-hidden"
+			{/* <section
+				className="w-full py-20 bg-background flex items-center justify-center relative overflow-hidden scroll-trigger opacity-0"
 				style={{
 					minHeight: "580px",
 					backgroundImage: "url('/img/boy-running.png')",
@@ -681,25 +720,26 @@ const Index = () => {
 					backgroundPosition: "center",
 				}}
 			>
+				<FloatingElements />
 				<div className="container mx-auto px-4 relative z-10">
 					<div className="flex justify-end">
 						<div className="flex flex-col items-center md:items-start text-center md:text-left max-w-xl ml-auto">
-							<h2 className="text-3xl md:text-4xl font-bold mb-6 text-black">
+							<h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
 								Are you ready to transform your business?
 							</h2>
-							<Button className="bg-[#38B6FF] hover:bg-black text-white px-8 py-4 rounded-lg shadow-lg text-lg font-semibold">
+							<Button className="bg-[#38B6FF] hover:bg-white hover:text-black text-white px-8 py-4 rounded-lg shadow-lg text-lg font-semibold transform hover:scale-105 transition-all duration-300">
 								Contact Us
 							</Button>
 						</div>
 					</div>
 				</div>
-			</section>
+			</section> */}
 
-			{/* Footer */}
+			{/* Enhanced Footer */}
 			<footer className="bg-black text-white py-16">
 				<div className="container mx-auto px-4">
 					<div className="grid md:grid-cols-4 gap-8">
-						<div>
+						<div className="scroll-trigger opacity-0">
 							<div className="flex items-center space-x-2 mb-6">
 								<div className="w-8 h-8 bg-[#38B6FF] rounded-lg"></div>
 								<span className="text-2xl font-bold">HACHI AGENCY</span>
@@ -709,83 +749,26 @@ const Index = () => {
 								worldwide.
 							</p>
 						</div>
-						<div>
-							<h4 className="text-lg font-semibold mb-6">Services</h4>
-							<ul className="space-y-2 text-white">
-								<li>
-									<a href="#" className="hover:text-[#38B6FF] transition-colors">
-										Web Development
-									</a>
-								</li>
-								<li>
-									<a href="#" className="hover:text-[#38B6FF] transition-colors">
-										Mobile Design
-									</a>
-								</li>
-								<li>
-									<a href="#" className="hover:text-[#38B6FF] transition-colors">
-										SEO Optimization
-									</a>
-								</li>
-								<li>
-									<a href="#" className="hover:text-[#38B6FF] transition-colors">
-										E-commerce
-									</a>
-								</li>
-							</ul>
-						</div>
-						<div>
-							<h4 className="text-lg font-semibold mb-6">Company</h4>
-							<ul className="space-y-2 text-white">
-								<li>
-									<a href="#" className="hover:text-[#38B6FF] transition-colors">
-										About Us
-									</a>
-								</li>
-								<li>
-									<a href="#" className="hover:text-[#38B6FF] transition-colors">
-										Portfolio
-									</a>
-								</li>
-								<li>
-									<a href="#" className="hover:text-[#38B6FF] transition-colors">
-										Careers
-									</a>
-								</li>
-								<li>
-									<a href="#" className="hover:text-[#38B6FF] transition-colors">
-										Contact
-									</a>
-								</li>
-							</ul>
-						</div>
-						<div>
-							<h4 className="text-lg font-semibold mb-6">Connect</h4>
-							<ul className="space-y-2 text-white">
-								<li>
-									<a href="#" className="hover:text-[#38B6FF] transition-colors">
-										Twitter
-									</a>
-								</li>
-								<li>
-									<a href="#" className="hover:text-[#38B6FF] transition-colors">
-										LinkedIn
-									</a>
-								</li>
-								<li>
-									<a href="#" className="hover:text-[#38B6FF] transition-colors">
-										Instagram
-									</a>
-								</li>
-								<li>
-									<a href="#" className="hover:text-[#38B6FF] transition-colors">
-										GitHub
-									</a>
-								</li>
-							</ul>
-						</div>
+						{[
+							{ title: "Services", links: ["Web Development", "Mobile Design", "SEO Optimization", "E-commerce"] },
+							{ title: "Company", links: ["About Us", "Portfolio", "Careers", "Contact"] },
+							{ title: "Connect", links: ["Twitter", "LinkedIn", "Instagram", "GitHub"] }
+						].map((section, index) => (
+							<div key={section.title} className="scroll-trigger opacity-0">
+								<h4 className="text-lg font-semibold mb-6">{section.title}</h4>
+								<ul className="space-y-2 text-white">
+									{section.links.map((link, linkIndex) => (
+										<li key={link}>
+											<a href="#" className="hover:text-[#38B6FF] transition-all duration-300 transform hover:translate-x-1 inline-block scroll-trigger opacity-0">
+												{link}
+											</a>
+										</li>
+									))}
+								</ul>
+							</div>
+						))}
 					</div>
-					<div className="border-t border-white mt-12 pt-8 text-center text-white">
+					<div className="border-t border-white mt-12 pt-8 text-center text-white scroll-trigger opacity-0">
 						<p>&copy; 2024 HACHI AGENCY. All rights reserved.</p>
 					</div>
 				</div>

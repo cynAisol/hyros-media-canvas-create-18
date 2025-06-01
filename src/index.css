@@ -5,23 +5,23 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%; /* white */
-    --foreground: 0 0% 0%; /* black */
+    --background: 222.2 84% 4.9%; /* very dark gray */
+    --foreground: 210 40% 98%; /* off-white */
 
-    --card: 0 0% 100%; /* white */
-    --card-foreground: 0 0% 0%; /* black */
+    --card: 222.2 84% 4.9%; /* very dark gray */
+    --card-foreground: 210 40% 98%; /* off-white */
 
-    --popover: 0 0% 100%; /* white */
-    --popover-foreground: 0 0% 0%; /* black */
+    --popover: 222.2 84% 4.9%; /* very dark gray */
+    --popover-foreground: 210 40% 98%; /* off-white */
 
     --primary: 202 100% 61%; /* #38B6FF */
     --primary-foreground: 0 0% 100%; /* white */
 
-    --secondary: 0 0% 96%; /* light gray variant of white */
-    --secondary-foreground: 0 0% 0%; /* black */
+    --secondary: 217.2 32.6% 17.5%; /* dark gray */
+    --secondary-foreground: 210 40% 98%; /* off-white */
 
-    --muted: 0 0% 96%; /* light gray variant of white */
-    --muted-foreground: 0 0% 40%; /* dark gray */
+    --muted: 217.2 32.6% 17.5%; /* dark gray */
+    --muted-foreground: 215 20.2% 65.1%; /* light gray */
 
     --accent: 202 100% 61%; /* #38B6FF */
     --accent-foreground: 0 0% 100%; /* white */
@@ -29,40 +29,40 @@
     --destructive: 0 84% 60%; /* keep for error states */
     --destructive-foreground: 0 0% 100%; /* white */
 
-    --border: 0 0% 90%; /* light gray */
-    --input: 0 0% 90%; /* light gray */
+    --border: 217.2 32.6% 17.5%; /* dark gray */
+    --input: 217.2 32.6% 17.5%; /* dark gray */
     --ring: 202 100% 61%; /* #38B6FF */
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 100%; /* white */
-    --sidebar-foreground: 0 0% 0%; /* black */
+    --sidebar-background: 222.2 84% 4.9%; /* very dark gray */
+    --sidebar-foreground: 210 40% 98%; /* off-white */
     --sidebar-primary: 202 100% 61%; /* #38B6FF */
     --sidebar-primary-foreground: 0 0% 100%; /* white */
-    --sidebar-accent: 0 0% 96%; /* light gray */
-    --sidebar-accent-foreground: 0 0% 0%; /* black */
-    --sidebar-border: 0 0% 90%; /* light gray */
+    --sidebar-accent: 217.2 32.6% 17.5%; /* dark gray */
+    --sidebar-accent-foreground: 210 40% 98%; /* off-white */
+    --sidebar-border: 217.2 32.6% 17.5%; /* dark gray */
     --sidebar-ring: 202 100% 61%; /* #38B6FF */
   }
 
   .dark {
-    --background: 0 0% 0%; /* black */
-    --foreground: 0 0% 100%; /* white */
+    --background: 222.2 84% 4.9%; /* very dark gray */
+    --foreground: 210 40% 98%; /* off-white */
 
-    --card: 0 0% 0%; /* black */
-    --card-foreground: 0 0% 100%; /* white */
+    --card: 222.2 84% 4.9%; /* very dark gray */
+    --card-foreground: 210 40% 98%; /* off-white */
 
-    --popover: 0 0% 0%; /* black */
-    --popover-foreground: 0 0% 100%; /* white */
+    --popover: 222.2 84% 4.9%; /* very dark gray */
+    --popover-foreground: 210 40% 98%; /* off-white */
 
     --primary: 202 100% 61%; /* #38B6FF */
     --primary-foreground: 0 0% 100%; /* white */
 
-    --secondary: 0 0% 10%; /* dark gray variant of black */
-    --secondary-foreground: 0 0% 100%; /* white */
+    --secondary: 217.2 32.6% 17.5%; /* dark gray */
+    --secondary-foreground: 210 40% 98%; /* off-white */
 
-    --muted: 0 0% 10%; /* dark gray variant of black */
-    --muted-foreground: 0 0% 60%; /* light gray */
+    --muted: 217.2 32.6% 17.5%; /* dark gray */
+    --muted-foreground: 215 20.2% 65.1%; /* light gray */
 
     --accent: 202 100% 61%; /* #38B6FF */
     --accent-foreground: 0 0% 100%; /* white */
@@ -70,17 +70,17 @@
     --destructive: 0 62% 31%; /* darker red for dark mode */
     --destructive-foreground: 0 0% 100%; /* white */
 
-    --border: 0 0% 20%; /* dark gray */
-    --input: 0 0% 20%; /* dark gray */
+    --border: 217.2 32.6% 17.5%; /* dark gray */
+    --input: 217.2 32.6% 17.5%; /* dark gray */
     --ring: 202 100% 61%; /* #38B6FF */
 
-    --sidebar-background: 0 0% 0%; /* black */
-    --sidebar-foreground: 0 0% 100%; /* white */
+    --sidebar-background: 222.2 84% 4.9%; /* very dark gray */
+    --sidebar-foreground: 210 40% 98%; /* off-white */
     --sidebar-primary: 202 100% 61%; /* #38B6FF */
     --sidebar-primary-foreground: 0 0% 100%; /* white */
-    --sidebar-accent: 0 0% 10%; /* dark gray */
-    --sidebar-accent-foreground: 0 0% 100%; /* white */
-    --sidebar-border: 0 0% 20%; /* dark gray */
+    --sidebar-accent: 217.2 32.6% 17.5%; /* dark gray */
+    --sidebar-accent-foreground: 210 40% 98%; /* off-white */
+    --sidebar-border: 217.2 32.6% 17.5%; /* dark gray */
     --sidebar-ring: 202 100% 61%; /* #38B6FF */
   }
 }
@@ -97,7 +97,7 @@
 
 @layer utilities {
   .animate-fade-in {
-    animation: fadeIn 0.8s ease-out forwards;
+    animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   }
   
   @keyframes fadeIn {
@@ -124,15 +124,16 @@
     }
   }
 
+  /* Smooth blob animations - no bouncing */
   @keyframes blob-float {
     0%, 100% {
       transform: translateY(0px) translateX(0px) scale(1);
     }
     33% {
-      transform: translateY(-20px) translateX(10px) scale(1.1);
+      transform: translateY(-10px) translateX(5px) scale(1.02);
     }
     66% {
-      transform: translateY(20px) translateX(-10px) scale(0.9);
+      transform: translateY(10px) translateX(-5px) scale(0.98);
     }
   }
 
@@ -148,6 +149,107 @@
     }
     75% {
       border-radius: 40% 30% 60% 50% / 70% 50% 40% 30%;
+    }
+  }
+
+  /* Enhanced scroll trigger styles */
+  .scroll-trigger {
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .scroll-trigger.opacity-0 {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  /* Enhanced fade in animation for scroll triggers */
+  .scroll-trigger.animate-fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Number counter animation */
+  @keyframes countUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .counter-animate {
+    animation: countUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+
+  /* New animations for WorkingProcess component */
+  @keyframes float-particle {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+      opacity: 0.3;
+    }
+    50% {
+      transform: translateY(-20px) rotate(180deg);
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes grid-move {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(40px, 40px);
+    }
+  }
+
+  @keyframes line-glow {
+    0%, 100% {
+      transform: translateX(-100px);
+      opacity: 0;
+    }
+    50% {
+      transform: translateX(calc(100vw + 100px));
+      opacity: 1;
+    }
+  }
+
+  @keyframes line-glow-vertical {
+    0%, 100% {
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+    50% {
+      transform: translateY(calc(100vh + 50px));
+      opacity: 1;
+    }
+  }
+
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 0.4;
+    }
+    100% {
+      transform: scale(1.4);
+      opacity: 0;
+    }
+  }
+
+  @keyframes sparkle {
+    0%, 100% {
+      transform: scale(1) rotate(0deg);
+      opacity: 0.4;
+    }
+    50% {
+      transform: scale(1.5) rotate(180deg);
+      opacity: 1;
     }
   }
 }
