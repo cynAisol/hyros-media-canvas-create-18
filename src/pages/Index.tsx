@@ -198,10 +198,9 @@ const Index = () => {
 	];
 
 	const typingTexts = [
-		"Future Today",
-		"Success Story",
-		"Dreams Reality",
-		"Vision to Life",
+		"ORDERS",
+		"BOOKING",
+		"SALES",
 	];
 
 	// Counter hooks for stats
@@ -278,9 +277,9 @@ const Index = () => {
 							{/* Main Headline - NO SCROLL TRIGGER */}
 							<div className="space-y-4">
 								<h1 className="text-5xl md:text-7xl font-bold text-foreground leading-tight">
-									Build Your
+									INCREASE 
 									<br />
-									<span className="text-[#38B6FF]">Digital</span>
+									<span className="text-[#38B6FF]">YOUR</span>
 									<br />
 									<TypingAnimation
 										texts={typingTexts}
