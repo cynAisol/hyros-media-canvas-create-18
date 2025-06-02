@@ -25,7 +25,15 @@ const Testimonials = () => {
       rating: 5,
       text: "The team nailed the look and feel of our brand right from the start. The site looks beautiful, loads fast, and works perfectly on mobile. We've had so many compliments from our customers already!",
       author: "Amanda T.",
-      company: "Founder at Creative Studio",
+      location: "Toronto, ON",
+      avatar: ""
+    },
+    {
+      id: 4,
+      rating: 5,
+      text: "After launching the new site, our online orders and inquiries doubled. They didn’t just build a website they created a real growth tool for our business.Jason M.",
+      author: "Jason M.",
+      location: "Vancouver, BC",
       avatar: ""
     },
     {
@@ -84,53 +92,49 @@ const Testimonials = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6 all-cap">
             Trusted by Professionals
           </h2>
-          <p className="text-lg text-foreground max-w-4xl mx-auto mb-12">
+          <p className="text-lg text-black max-w-4xl mx-auto">
             While most of my client reviews are NDA-protected (because, you know, top-secret agency white label stuff), 
             I managed to sneak in a few favorites from my previous partners.
           </p>
         </div>
 
-        {/* Scrolling Testimonials Container */}
-        <div className="relative overflow-hidden">
-          <div className="flex animate-scroll gap-6" style={{ width: 'calc(350px * 14)' }}>
-            {duplicatedTestimonials.map((testimonial, index) => (
-              <div 
-              style={{maxWidth:"500px"}}  
-                key={`${testimonial.id}-${index}`} 
-                className="bg-card rounded-xl p-6 shadow-lg border border-border hover:shadow-xl transition-shadow min-w-[350px] h-[320px] flex-shrink-0 flex flex-col"
-              >
-                {/* Header with Avatar and Info */}
-                <div className="flex items-center mb-4"  >
-                  <Avatar className="mr-3 w-12 h-12">
-                    <AvatarImage 
-                      src={testimonial.avatar} 
-                      alt={testimonial.author}
-                      className="object-cover"
-                    />
-                    <AvatarFallback className="bg-[#38B6FF] text-white font-semibold text-sm">
-                      {testimonial.author.split(' ').map(n => n[0]).join('')}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div className="min-w-0">
-                    <div className="font-semibold text-foreground text-sm">
-                      {testimonial.author}
-                    </div>
-                    <div className="text-muted-foreground text-xs">
-                      {testimonial.company}
-                    </div>
+        {/* Testimonials Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {testimonials.map((testimonial) => (
+            <div key={testimonial.id} className="bg-black rounded-xl p-6 shadow-sm border border-black hover:shadow-md transition-shadow">
+              {/* Stars */}
+              <div className="flex mb-4">
+                {renderStars(testimonial.rating)}
+              </div>
+
+              {/* Testimonial Text */}
+              <p className="text-white font-semibold mb-3 text-sm leading-relaxed"style={{minHeight:"9.8em"}}>
+                {testimonial.text}
+              </p>
+              
+              {/* <p className="text-white text-sm mb-6 leading-relaxed">
+                {testimonial.additionalText}
+              </p> */}
+
+              {/* Author with Avatar Component */}
+              <div className="flex items-center">
+                <Avatar className="mr-3 w-10 h-10">
+                  <AvatarImage 
+                    src={testimonial.avatar} 
+                    alt={testimonial.author}
+                    className="object-cover"
+                  />
+                  <AvatarFallback className="bg-[#38B6FF] text-white font-semibold">
+                    {testimonial.author.split(' ').map(n => n[0]).join('')}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="min-w-0">
+                  <div className="font-semibold text-white text-sm truncate">
+                    {testimonial.author}
                   </div>
-                </div>
-
-                {/* Stars */}
-                <div className="flex mb-4">
-                  {renderStars(testimonial.rating)}
-                </div>
-
-                {/* Testimonial Text */}
-                <div className="flex-grow overflow-hidden">
-                  <p className="text-muted-foreground text-sm leading-relaxed line-clamp-6">
-                    {testimonial.text}
-                  </p>
+                  <div className="text-white text-xs truncate">
+                    {testimonial.location}
+                  </div>
                 </div>
               </div>
             ))}
