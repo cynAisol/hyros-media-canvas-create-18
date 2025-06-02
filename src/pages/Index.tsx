@@ -166,14 +166,36 @@ const Index = () => {
 			description: "The Lion Group, an eCommerce accelerator for Fortune 500 firms and fast-growing startups, outgrew its website. We did a full revamp, including conversion-focused design, messaging, and strategy.",
 			image: "/img/website1.png",
 			url: "https://atoleajewelry.com/",
-			backgroundColor: "bg-gradient-to-br from-purple-500 to-pink-500",
 		},
 		{
 			title: "Transforming Fiddlers Green CBD's digital presence",
 			description: "We helped Fiddler's Green with a full brand and design refresh. They had touching customer stories about regaining their fullest lives with its CBD products. However, their website wasn't conveying this message. Our redesign increased store orders by 158%.",
 			image: "/img/website2.png",
 			url: "https://burstoralcare.com/",
-			backgroundColor: "bg-gradient-to-br from-orange-500 to-yellow-500",
+		},
+		{
+			title: "E-commerce Platform Redesign",
+			description: "Complete overhaul of an online marketplace, improving user experience and conversion rates by 200%.",
+			image: "/img/website3.png",
+			url: "#",
+		},
+		{
+			title: "SaaS Dashboard Optimization",
+			description: "Streamlined dashboard design for a B2B SaaS platform, reducing user onboarding time by 60%.",
+			image: "/img/website4.png",
+			url: "#",
+		},
+		{
+			title: "Healthcare Platform Development",
+			description: "Comprehensive healthcare management system with improved patient engagement and 99.9% uptime.",
+			image: "/img/website5.png",
+			url: "#",
+		},
+		{
+			title: "Fintech Mobile App",
+			description: "Secure and intuitive mobile banking solution with advanced security features and seamless UX.",
+			image: "/img/website6.png",
+			url: "#",
 		},
 	];
 
@@ -384,7 +406,7 @@ const Index = () => {
 			{/* Benefits/Why US Section */}
 			<WhyUs />
 
-			{/* Portfolio Section - NO SCROLL TRIGGERS */}
+			{/* Portfolio Section */}
 			<section
 				id="portfolio"
 				className="py-20 bg-background relative overflow-hidden"
@@ -416,32 +438,32 @@ const Index = () => {
 						</p>
 					</div>
 
-					{/* Portfolio Cards Grid */}
-					<div className="grid md:grid-cols-2 gap-12 mb-16">
+					{/* Portfolio Cards Grid - 2 per row */}
+					<div className="grid md:grid-cols-2 gap-8 mb-16">
 						{portfolioItems.map((item, index) => (
 							<div key={index} className="group">
-								<div className={`${item.backgroundColor} rounded-3xl p-8 h-auto flex flex-col`}>
+								<div className="bg-card border border-border rounded-3xl p-8 h-auto flex flex-col hover:shadow-xl transition-all duration-500">
 									{/* Website Image */}
-									<div className="bg-white rounded-2xl p-6 mb-6 shadow-xl">
+									<div className="bg-white rounded-2xl p-6 mb-6 shadow-lg">
 										<img
 											src={item.image}
 											alt={item.title}
-											className="w-full h-auto rounded-lg shadow-lg"
+											className="w-full h-auto rounded-lg shadow-md"
 										/>
 									</div>
 									
 									{/* Content */}
-									<div className="text-white flex-grow">
-										<h3 className="text-2xl font-bold mb-4 leading-tight">
+									<div className="text-foreground flex-grow">
+										<h3 className="text-2xl font-bold mb-4 leading-tight text-foreground">
 											{item.title}
 										</h3>
-										<p className="text-white/90 mb-6 leading-relaxed">
+										<p className="text-foreground/80 mb-6 leading-relaxed">
 											{item.description}
 										</p>
 										
 										{/* CTA Button */}
 										<div className="mt-auto">
-											<button className="border-2 border-white/30 text-white px-6 py-3 rounded-lg hover:bg-white hover:text-black transition-all duration-300 font-medium">
+											<button className="border-2 border-[#38B6FF] text-[#38B6FF] px-6 py-3 rounded-lg hover:bg-[#38B6FF] hover:text-white transition-all duration-300 font-medium">
 												View Case Study
 											</button>
 										</div>
