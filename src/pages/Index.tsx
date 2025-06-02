@@ -218,7 +218,7 @@ const Index = () => {
 							</span>
 						</div>
 						<div className="hidden md:flex items-center space-x-8">
-							{["Home", "Services", "Portfolio", "About", "Contact"].map(
+							{["Home", "Portfolio", "About", "Contact"].map(
 								(item) => (
 									<a
 										key={item}
