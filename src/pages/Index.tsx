@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Hero from "@/components/Hero";
 import StrategicPartners from "@/components/StrategicPartners";
@@ -5,8 +6,7 @@ import WorkingProcess from "@/components/WorkingProcess";
 import WhyUs from "@/components/WhyUs";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
-import { ModeToggle } from "@/components/ModeToggle"
-import Link from 'next/link';
+import { ModeToggle } from "@/components/ModeToggle";
 
 const Index = () => {
   const links = [
@@ -21,14 +21,14 @@ const Index = () => {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold">
+          <a href="/" className="text-2xl font-bold">
             Logo
-          </Link>
+          </a>
           <nav className="hidden md:flex items-center space-x-6">
             {links.map((link) => (
-              <Link key={link.href} href={link.href} className="hover:text-primary transition-colors">
+              <a key={link.href} href={link.href} className="hover:text-primary transition-colors">
                 {link.label}
-              </Link>
+              </a>
             ))}
             <ModeToggle />
           </nav>
