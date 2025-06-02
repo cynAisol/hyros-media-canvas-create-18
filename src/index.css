@@ -112,7 +112,7 @@
   }
 
   .animate-scroll {
-    animation: scroll 40s linear infinite;
+    animation: scroll 20s linear infinite;
   }
   
   @keyframes scroll {
@@ -120,7 +120,7 @@
       transform: translateX(0);
     }
     100% {
-      transform: translateX(-50%);
+      transform: translateX(-33.333%);
     }
   }
 
@@ -253,6 +253,7 @@
     }
   }
 }
+
 
 .all-cap{
   text-transform: uppercase !important;
