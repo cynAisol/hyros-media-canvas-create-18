@@ -100,11 +100,11 @@ const Testimonials = () => {
 
         {/* Scrolling Testimonials Container */}
         <div className="relative overflow-hidden">
-          <div className="flex animate-scroll gap-6" style={{ width: 'calc(400px * 16)' }}>
+          <div className="flex animate-scroll gap-6" style={{ width: 'calc(350px * 16)' }}>
             {duplicatedTestimonials.map((testimonial, index) => (
               <div 
                 key={`${testimonial.id}-${index}`} 
-                className="bg-card rounded-xl p-6 shadow-lg border border-border hover:shadow-xl transition-shadow min-w-[400px] flex-shrink-0"
+                className="bg-card rounded-xl p-6 shadow-lg border border-border hover:shadow-xl transition-shadow min-w-[350px] flex-shrink-0"
               >
                 {/* Header with Avatar and Info */}
                 <div className="flex items-center mb-4">
