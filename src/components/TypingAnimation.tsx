@@ -46,7 +46,7 @@ const TypingAnimation = ({ texts, speed = 100, pauseDuration = 2000 }: TypingAni
   }, [charIndex, isTyping, currentTextIndex, texts, speed, pauseDuration]);
 
   return (
-    <span className="text-blue-400">
+    <span style={{ color: "#38B6FF" }}>
       {currentText}
       <span className="animate-pulse">|</span>
     </span>

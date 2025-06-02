@@ -341,7 +341,7 @@ const Index = () => {
 
 							{/* Social Proof - NO SCROLL TRIGGER */}
 
-							<div className="mt-10 flex justify-center">
+							<div className="mt-10">
 								<div className="max-w-md">
 									<ReviewCard />
 								</div>
