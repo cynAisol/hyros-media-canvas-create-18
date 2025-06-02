@@ -72,12 +72,12 @@ const WhyUs = () => {
             </div>
             <div className="flex flex-col items-center group">
               <div className="w-16 h-16 bg-white/20 border border-white rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                <span className="text-2xl">🚀</span>
+                {/* <span className="text-2xl">🚀</span> */}
               </div>
               <span className="text-sm text-muted-foreground font-medium">Deliver</span>
             </div>
           </div>
-          <span className="absolute -right-8 top-2 text-3xl">🦄</span>
+          {/* <span className="absolute -right-8 top-2 text-3xl">🦄</span> */}
         </div>
 
         <div className="max-w-4xl mx-auto bg-gradient-to-br from-[#38B6FF]/10 to-[#38B6FF]/20 rounded-2xl p-8 shadow-lg border border-[#38B6FF]/30 backdrop-blur-sm">
