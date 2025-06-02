@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -161,40 +162,18 @@ const Index = () => {
 
 	const portfolioItems = [
 		{
-			title: "Jewelry Store",
-			category: "E-commerce",
+			title: "Bringing The Lion Group's vision to life and increasing leads by 142%",
+			description: "The Lion Group, an eCommerce accelerator for Fortune 500 firms and fast-growing startups, outgrew its website. We did a full revamp, including conversion-focused design, messaging, and strategy.",
 			image: "/img/website1.png",
 			url: "https://atoleajewelry.com/",
+			backgroundColor: "bg-gradient-to-br from-purple-500 to-pink-500",
 		},
 		{
-			title: "Dental care",
-			category: "Web Development",
+			title: "Transforming Fiddlers Green CBD's digital presence",
+			description: "We helped Fiddler's Green with a full brand and design refresh. They had touching customer stories about regaining their fullest lives with its CBD products. However, their website wasn't conveying this message. Our redesign increased store orders by 158%.",
 			image: "/img/website2.png",
 			url: "https://burstoralcare.com/",
-		},
-		{
-			title: "Tech solution",
-			category: "Landing Page",
-			image: "/img/website3.png",
-			url: "https://zepto.com.au/",
-		},
-		{
-			title: "Sales & Marketing",
-			category: "Marketing Page",
-			image: "/img/website4.png",
-			url: "https://www.firsttouch.com/",
-		},
-		{
-			title: "Anti Aging ",
-			category: "Landing Page",
-			image: "/img/website5.png",
-			url: "https://letsdisco.com/",
-		},
-		{
-			title: "Gaming",
-			category: "web Development",
-			image: "/img/website6.png",
-			url: "https://aloquerciodesign.com/",
+			backgroundColor: "bg-gradient-to-br from-orange-500 to-yellow-500",
 		},
 	];
 
@@ -346,40 +325,6 @@ const Index = () => {
 									<ReviewCard />
 								</div>
 							</div>
-
-							{/* 							
-							<div className="pt-4">
-								<div className="flex items-center gap-6">
-									<div className="flex items-center gap-2">
-										<div className="flex -space-x-2">
-											<div className="w-8 h-8 bg-[#38B6FF] rounded-full border-2 border-white"></div>
-											<div className="w-8 h-8 bg-white rounded-full border-2 border-white"></div>
-											<div className="w-8 h-8 bg-[#38B6FF] rounded-full border-2 border-white"></div>
-											<div className="w-8 h-8 bg-white rounded-full border-2 border-white flex items-center justify-center">
-												<span className="text-xs font-bold text-black">+</span>
-											</div>
-										</div>
-										<span className="text-sm text-foreground font-medium">
-											50+ Happy Clients
-										</span>
-									</div>
-									<div className="flex items-center gap-1">
-										{[...Array(5)].map((_, i) => (
-											<Star
-												key={i}
-												className="w-4 h-4 fill-[#38B6FF] text-[#38B6FF]"
-											/>
-										))}
-										<span className="text-sm text-foreground ml-1">
-											4.9/5 Rating
-										</span>
-									</div>
-								</div>
-							</div>
-
-
-
- */}
 						</div>
 
 						{/* Enhanced Visual Section - NO SCROLL TRIGGER */}
@@ -461,76 +406,52 @@ const Index = () => {
 				<FloatingElements />
 
 				<div className="container mx-auto px-4 relative z-10">
-					<div className="text-center mb-16 flex flex-col items-center relative">
-						<Badge className="mb-4 bg-[#38B6FF] text-white">Our Work</Badge>
-						<h2 className="text-4xl md:text-5xl font-bold text-foreground mb-2 flex items-center justify-center gap-2">
-							<span className="all-cap">Portfolio Highlights</span>
+					{/* Header Section */}
+					<div className="text-center mb-16">
+						<h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+							High-performing websites with <span className="text-[#38B6FF]">proven results</span>
 						</h2>
-						<p className="text-xl text-foreground max-w-3xl mx-auto mb-4">
-							Discover some of our recent projects that showcase our expertise
-							and creativity.
+						<p className="text-lg text-foreground max-w-4xl mx-auto">
+							We've found success working with teams in nearly every industry, from startups to large enterprises that get over 400k visitors to their website per month.
 						</p>
 					</div>
-					<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-						{portfolioItems.map((item, index) => (
-							<a href={item.url} key={index} className="group">
-								<Card className="group overflow-hidden transition-all duration-500 border-border bg-card transform hover:scale-[1.02] hover:shadow-2xl relative">
-									{/* Animated border gradient */}
-									<div className="absolute inset-0 bg-gradient-to-r from-[#38B6FF]/20 via-transparent to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg"></div>
 
-									<div className="relative overflow-hidden rounded-t-lg">
+					{/* Portfolio Cards Grid */}
+					<div className="grid md:grid-cols-2 gap-12 mb-16">
+						{portfolioItems.map((item, index) => (
+							<div key={index} className="group">
+								<div className={`${item.backgroundColor} rounded-3xl p-8 h-auto flex flex-col`}>
+									{/* Website Image */}
+									<div className="bg-white rounded-2xl p-6 mb-6 shadow-xl">
 										<img
 											src={item.image}
 											alt={item.title}
-											className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
+											className="w-full h-auto rounded-lg shadow-lg"
 										/>
-										{/* Overlay with animated elements */}
-										<div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-											<div className="text-white text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-												<div className="text-lg font-semibold mb-2">
-													View Project
-												</div>
-												<div className="w-12 h-0.5 bg-[#38B6FF] mx-auto"></div>
-											</div>
-										</div>
-
-										{/* Floating badge */}
-										<div className="absolute top-4 right-4 transform translate-x-8 group-hover:translate-x-0 transition-transform duration-500">
-											<Badge className="bg-[#38B6FF]/90 text-white backdrop-blur-sm">
-												{item.category}
-											</Badge>
+									</div>
+									
+									{/* Content */}
+									<div className="text-white flex-grow">
+										<h3 className="text-2xl font-bold mb-4 leading-tight">
+											{item.title}
+										</h3>
+										<p className="text-white/90 mb-6 leading-relaxed">
+											{item.description}
+										</p>
+										
+										{/* CTA Button */}
+										<div className="mt-auto">
+											<button className="border-2 border-white/30 text-white px-6 py-3 rounded-lg hover:bg-white hover:text-black transition-all duration-300 font-medium">
+												View Case Study
+											</button>
 										</div>
 									</div>
-
-									<CardHeader className="relative">
-										{/* Animated background pattern */}
-										<div className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500">
-											<div className="w-full h-full bg-gradient-to-br from-[#38B6FF] to-white"></div>
-										</div>
-
-										<div className="flex items-center justify-between relative z-10">
-											<div className="space-y-2">
-												<CardTitle className="group-hover:text-[#38B6FF] transition-colors duration-300 text-foreground text-xl">
-													{item.title}
-												</CardTitle>
-												<div className="flex items-center gap-2 text-sm text-muted-foreground">
-													<div className="w-2 h-2 bg-[#38B6FF] rounded-full"></div>
-													<span>Click to explore</span>
-												</div>
-											</div>
-											<ArrowRight className="w-6 h-6 text-foreground group-hover:text-[#38B6FF] transition-all duration-300 transform group-hover:translate-x-1 group-hover:scale-110" />
-										</div>
-
-										{/* Progress bar animation */}
-										<div className="mt-4 h-1 bg-border rounded-full overflow-hidden">
-											<div className="h-full bg-gradient-to-r from-[#38B6FF] to-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-1000 ease-out"></div>
-										</div>
-									</CardHeader>
-								</Card>
-							</a>
+								</div>
+							</div>
 						))}
 					</div>
-					{/* Enhanced Portfolio Showcase Card */}
+
+					{/* Additional Portfolio Showcase Card */}
 					<div className="flex justify-center mt-12">
 						<div className="bg-card rounded-xl shadow-lg p-6 max-w-lg text-left border border-border hover:shadow-2xl transform hover:scale-105 transition-all duration-500 relative overflow-hidden">
 							{/* Animated background */}
@@ -587,15 +508,15 @@ const Index = () => {
 								Crafting Digital Excellence Since Day One
 							</h2> */}
 							<p className="text-lg text-foreground mb-8">
-								We’re a results-driven website agency built for businesses that
-								want more than just “a beautiful website.” Our mission is
+								We're a results-driven website agency built for businesses that
+								want more than just "a beautiful website." Our mission is
 								simple: create stunning, high-converting websites that drive
 								real growth so you can focus on your business.
 							</p>
 							<p className="text-lg text-foreground mb-8">
 								Whether you're a local business, web 3 service or startup, we
 								combine top-tier design with smart strategy so your website
-								doesn’t just look great, it works. With custom UX/UI and a deep
+								doesn't just look great, it works. With custom UX/UI and a deep
 								focus on conversions, we help you turn visitors into loyal
 								customers.
 							</p>
@@ -722,11 +643,6 @@ const Index = () => {
 											title: "Phone",
 											content: ["306-491-5910"],
 										},
-										// {
-										// 	icon: MapPin,
-										// 	title: "Location",
-										// 	content: ["San Francisco, CA"],
-										// },
 									].map((item, index) => (
 										<div
 											key={index}
@@ -821,32 +737,6 @@ const Index = () => {
 					</div>
 				</div>
 			</section>
-
-			{/* Call to Action Section - Boy Running as Full Background */}
-			{/* <section
-				className="w-full py-20 bg-background flex items-center justify-center relative overflow-hidden scroll-trigger opacity-0"
-				style={{
-					minHeight: "580px",
-					backgroundImage: "url('/img/boy-running.png')",
-					backgroundRepeat: "no-repeat",
-					backgroundSize: "contain",
-					backgroundPosition: "center",
-				}}
-			>
-				<FloatingElements />
-				<div className="container mx-auto px-4 relative z-10">
-					<div className="flex justify-end">
-						<div className="flex flex-col items-center md:items-start text-center md:text-left max-w-xl ml-auto">
-							<h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
-								Are you ready to transform your business?
-							</h2>
-							<Button className="bg-[#38B6FF] hover:bg-white hover:text-black text-white px-8 py-4 rounded-lg shadow-lg text-lg font-semibold transform hover:scale-105 transition-all duration-300">
-								Contact Us
-							</Button>
-						</div>
-					</div>
-				</div>
-			</section> */}
 
 			{/* Enhanced Footer */}
 			<footer className="bg-black text-white py-16">
