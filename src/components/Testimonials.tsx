@@ -70,68 +70,76 @@ const Testimonials = () => {
     },
   ];
 
+  // Duplicate testimonials for infinite scroll effect
+  const allTestimonials = [...testimonials, ...testimonials];
+
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, index) => (
       <Star
         key={index}
         className={`w-4 h-4 ${
-          index < rating ? 'fill-green-500 text-green-500' : 'text-gray-300'
+          index < rating ? 'fill-[#38B6FF] text-[#38B6FF]' : 'text-white/30'
         }`}
       />
     ));
   };
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-black overflow-hidden">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-black mb-6 all-cap">
-            Trusted by Professionals
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            TRUSTED BY <span style={{ color: '#38B6FF' }}>PROFESSIONALS</span>
           </h2>
-          <p className="text-lg text-black max-w-4xl mx-auto">
+          <p className="text-lg text-white/80 max-w-4xl mx-auto">
             While most of my client reviews are NDA-protected (because, you know, top-secret agency white label stuff), 
             I managed to sneak in a few favorites from my previous partners.
           </p>
         </div>
 
-        {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map((testimonial) => (
-            <div key={testimonial.id} className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-              {/* Header with Avatar and Info */}
-              <div className="flex items-center mb-4">
-                <Avatar className="mr-3 w-12 h-12">
-                  <AvatarImage 
-                    src={testimonial.avatar} 
-                    alt={testimonial.author}
-                    className="object-cover"
-                  />
-                  <AvatarFallback className="bg-green-500 text-white font-semibold text-sm">
-                    {testimonial.author.split(' ').map(n => n[0]).join('')}
-                  </AvatarFallback>
-                </Avatar>
-                <div className="min-w-0">
-                  <div className="font-semibold text-black text-sm">
-                    {testimonial.author}
-                  </div>
-                  <div className="text-gray-600 text-xs">
-                    {testimonial.company}
+        {/* Infinite Scroll Container */}
+        <div className="relative">
+          <div className="flex animate-scroll space-x-6" style={{ animationDuration: '40s' }}>
+            {allTestimonials.map((testimonial, index) => (
+              <div 
+                key={`${testimonial.id}-${index}`} 
+                className="flex-shrink-0 w-96 bg-white rounded-xl p-6 shadow-lg border border-white/10"
+              >
+                {/* Header with Avatar and Info */}
+                <div className="flex items-center mb-4">
+                  <Avatar className="mr-3 w-12 h-12">
+                    <AvatarImage 
+                      src={testimonial.avatar} 
+                      alt={testimonial.author}
+                      className="object-cover"
+                    />
+                    <AvatarFallback style={{ backgroundColor: '#38B6FF' }} className="text-white font-semibold text-sm">
+                      {testimonial.author.split(' ').map(n => n[0]).join('')}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="min-w-0">
+                    <div className="font-semibold text-black text-sm">
+                      {testimonial.author}
+                    </div>
+                    <div className="text-black/60 text-xs">
+                      {testimonial.company}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Stars */}
-              <div className="flex mb-4">
-                {renderStars(testimonial.rating)}
-              </div>
+                {/* Stars */}
+                <div className="flex mb-4">
+                  {renderStars(testimonial.rating)}
+                </div>
 
-              {/* Testimonial Text */}
-              <p className="text-gray-700 text-sm leading-relaxed">
-                {testimonial.text}
-              </p>
-            </div>
-          ))}
+                {/* Testimonial Text */}
+                <p className="text-black/70 text-sm leading-relaxed">
+                  {testimonial.text}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
