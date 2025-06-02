@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -275,9 +274,7 @@ const Index = () => {
 							{/* Main Headline - NO SCROLL TRIGGER */}
 							<div className="space-y-4">
 								<h1 className="text-5xl md:text-7xl font-bold text-foreground leading-tight">
-									INCREASE
-									<br />
-									<span className="text-[#38B6FF]">YOUR</span>
+									INCREASE YOUR
 									<br />
 									<TypingAnimation
 										texts={typingTexts}
