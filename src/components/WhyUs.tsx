@@ -2,6 +2,8 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
+import FloatingEmoji from "./FloatingEmoji";
+import AnimatedBlob from "./AnimatedBlob";
 
 const WhyUs = () => {
   const benefits = [
@@ -40,51 +42,65 @@ const WhyUs = () => {
         <ellipse cx="350" cy="180" rx="120" ry="90" fill="#ffffff" fillOpacity="0.6" />
       </svg>
       
+      {/* Add animated floating emojis */}
+      <FloatingEmoji emoji="🌟" count={5} />
+      <FloatingEmoji emoji="💡" count={3} />
+      
+      {/* Add animated blobs */}
+      <AnimatedBlob size="large" color="blue" position="top-right" delay={1} />
+      <AnimatedBlob size="medium" color="white" position="bottom-left" delay={2} />
+
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16 flex flex-col items-center relative">
-          <span className="absolute -left-8 top-2 text-3xl">💡</span>
           <Badge className="mb-4 bg-[#38B6FF] text-white border-0">Why Choose Us</Badge>
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-2 flex items-center justify-center gap-2">
             <span>WHY CHOOSE US</span>
-            <span className="text-3xl">🌟</span>
+            <span className="text-4xl">🌟</span>
           </h2>
           <div className="text-muted-foreground text-lg mb-4 max-w-2xl mx-auto">Your partner for speed, security, and innovation in digital transformation</div>
           
           {/* How We Work Process Row */}
           <div className="flex justify-center gap-10 mb-10">
             <div className="flex flex-col items-center group">
-              <div className="w-16 h-16 bg-[#38B6FF]/20 border border-[#38B6FF] rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+              <div className="w-16 h-16 bg-[#38B6FF]/20 border-2 border-[#38B6FF] rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                 <span className="text-2xl">🔍</span>
               </div>
               <span className="text-sm text-muted-foreground font-medium">Discover</span>
             </div>
             <div className="flex flex-col items-center group">
-              <div className="w-16 h-16 bg-white/20 border border-white rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+              <div className="w-16 h-16 bg-[#38B6FF]/20 border-2 border-[#38B6FF] rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                 <span className="text-2xl">🎨</span>
               </div>
               <span className="text-sm text-muted-foreground font-medium">Design</span>
             </div>
             <div className="flex flex-col items-center group">
-              <div className="w-16 h-16 bg-[#38B6FF]/20 border border-[#38B6FF] rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+              <div className="w-16 h-16 bg-[#38B6FF]/20 border-2 border-[#38B6FF] rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                 <span className="text-2xl">💻</span>
               </div>
               <span className="text-sm text-muted-foreground font-medium">Develop</span>
             </div>
             <div className="flex flex-col items-center group">
-              <div className="w-16 h-16 bg-white/20 border border-white rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                {/* <span className="text-2xl">🚀</span> */}
+              <div className="w-16 h-16 bg-[#38B6FF]/20 border-2 border-[#38B6FF] rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                <span className="text-2xl">🚀</span>
               </div>
               <span className="text-sm text-muted-foreground font-medium">Deliver</span>
             </div>
           </div>
-          {/* <span className="absolute -right-8 top-2 text-3xl">🦄</span> */}
         </div>
 
-        <div className="max-w-4xl mx-auto bg-gradient-to-br from-[#38B6FF]/10 to-[#38B6FF]/20 rounded-2xl p-8 shadow-lg border border-[#38B6FF]/30 backdrop-blur-sm">
-          <div className="grid md:grid-cols-2 gap-6">
+        <div className="max-w-4xl mx-auto bg-gradient-to-br from-[#38B6FF]/10 to-[#38B6FF]/20 rounded-2xl p-8 shadow-lg border border-[#38B6FF]/30 backdrop-blur-sm relative overflow-hidden">
+          {/* Add pulsing ring animation */}
+          <div className="absolute -inset-2 rounded-3xl bg-[#38B6FF]/10 pointer-events-none">
+            <div className="absolute inset-0 rounded-3xl border-2 border-[#38B6FF]/30 animate-pulse-ring"></div>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-6 relative z-10">
             {benefits.map((benefit, index) => (
-              <div key={`benefit-${benefit.replace(/\s+/g, '-').toLowerCase()}-${index}`} className="flex items-start gap-3 group">
-                <div className="w-6 h-6 bg-[#38B6FF] rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-md mt-0.5">
+              <div 
+                key={`benefit-${index}`} 
+                className="flex items-start gap-3 group hover:scale-[1.02] transition-transform duration-300"
+              >
+                <div className="w-6 h-6 bg-[#38B6FF] rounded-full flex items-center justify-center flex-shrink-0 group-hover:animate-pulse shadow-md mt-0.5">
                   <Check className="w-4 h-4 text-white" />
                 </div>
                 <p className="text-foreground text-lg font-medium group-hover:text-[#38B6FF] transition-colors">
@@ -101,7 +117,6 @@ const WhyUs = () => {
           </div>
         </div>
       </div>
-      
     </section>
   );
 };

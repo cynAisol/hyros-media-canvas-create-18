@@ -40,6 +40,7 @@ import TypingAnimation from "@/components/TypingAnimation";
 import Testimonials from "@/components/Testimonials";
 import AnimatedBlob from "@/components/AnimatedBlob";
 import FloatingElements from "@/components/FloatingElements";
+import ReviewCard from "@/components/ReviewCard";
 
 const Index = () => {
 	const [formData, setFormData] = useState({
@@ -197,11 +198,7 @@ const Index = () => {
 		},
 	];
 
-	const typingTexts = [
-		"ORDERS",
-		"BOOKING",
-		"SALES",
-	];
+	const typingTexts = ["ORDERS", "BOOKING", "SALES"];
 
 	// Counter hooks for stats
 	const projectsCount = useCountAnimation(49, 2000, "+");
@@ -277,7 +274,7 @@ const Index = () => {
 							{/* Main Headline - NO SCROLL TRIGGER */}
 							<div className="space-y-4">
 								<h1 className="text-5xl md:text-7xl font-bold text-foreground leading-tight">
-									INCREASE 
+									INCREASE
 									<br />
 									<span className="text-[#38B6FF]">YOUR</span>
 									<br />
@@ -343,6 +340,14 @@ const Index = () => {
 							</div>
 
 							{/* Social Proof - NO SCROLL TRIGGER */}
+
+							<div className="mt-10 flex justify-center">
+								<div className="max-w-md">
+									<ReviewCard />
+								</div>
+							</div>
+
+							{/* 							
 							<div className="pt-4">
 								<div className="flex items-center gap-6">
 									<div className="flex items-center gap-2">
@@ -371,6 +376,10 @@ const Index = () => {
 									</div>
 								</div>
 							</div>
+
+
+
+ */}
 						</div>
 
 						{/* Enhanced Visual Section - NO SCROLL TRIGGER */}
@@ -706,9 +715,7 @@ const Index = () => {
 										{
 											icon: Mail,
 											title: "Email",
-											content: [
-												"contact@hachiagency.com",
-											],
+											content: ["contact@hachiagency.com"],
 										},
 										{
 											icon: Phone,
@@ -850,50 +857,24 @@ const Index = () => {
 								<div className="w-8 h-8 bg-[#38B6FF] rounded-lg"></div>
 								<span className="text-2xl font-bold">HACHI AGENCY</span>
 							</div>
-							<p className="text-white mb-6">
-								Your Success Is Our Success
-							</p>
+							<p className="text-white mb-6">Your Success Is Our Success</p>
 						</div>
 						{[
-							// {
-							// 	title: "Services",
-							// 	links: [
-							// 		"Web Development",
-							// 		"Mobile Design",
-							// 		"SEO Optimization",
-							// 		"E-commerce",
-							// 	],
-							// },
 							{
 								title: "Company",
-								linkData: [{
-									title: "About Us",
-									url: "#about",
-								},
-								{
-									title: "Blog",
-									url: "#blog",
-								}, 
-								{
-									title: "Privacy Policy",
-									url: "#privacy-policy",
-								}],
+								links: ["About Us", "Blog", "Privacy Policy"],
 							},
-							// {
-							// 	title: "Connect",
-							// 	links: ["Twitter", "LinkedIn", "Instagram", "GitHub"],
-							// },
 						].map((section, index) => (
 							<div key={section.title} className="scroll-trigger opacity-0">
 								<h4 className="text-lg font-semibold mb-6">{section.title}</h4>
 								<ul className="space-y-2 text-white">
-									{section.linkData.map((link, linkIndex) => (
+									{section.links.map((link, linkIndex) => (
 										<li key={link}>
 											<a
-												href={link.url}
+												href={`#${link.toLowerCase().replace(/\s+/g, "-")}`}
 												className="hover:text-[#38B6FF] transition-all duration-300 transform hover:translate-x-1 inline-block scroll-trigger opacity-0"
 											>
-												{link.title}
+												{link}
 											</a>
 										</li>
 									))}

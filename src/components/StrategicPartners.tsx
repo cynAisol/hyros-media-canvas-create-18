@@ -1,5 +1,6 @@
 
 import { Badge } from "@/components/ui/badge";
+import ReviewCard from "./ReviewCard";
 
 const StrategicPartners = () => {
   const partners = [
@@ -60,13 +61,12 @@ const StrategicPartners = () => {
           </div>
         </div>
         
-        {/* Testimonial Card */}
-        <div className="mt-10 flex justify-center">
-          <div className="bg-white rounded-xl shadow-lg p-6 max-w-lg text-left border border-gray-200">
-            <div className="text-gray-700 italic mb-2">"Working with HACHI AGENCY was a game changer for our business. Their team delivered beyond expectations!"</div>
-            <div className="font-bold text-black">— Alex P., CEO of ExampleCorp</div>
+        {/* Review Card - Replacing the old testimonial card */}
+        {/* <div className="mt-10 flex justify-center">
+          <div className="max-w-md">
+            <ReviewCard />
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

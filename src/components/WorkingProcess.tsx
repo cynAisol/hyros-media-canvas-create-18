@@ -26,7 +26,7 @@ const WorkingProcess = () => {
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-black text-white relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-background text-white relative overflow-hidden">
       {/* Background elements */}
       <AnimatedBlob size="large" color="blue" position="top-left" delay={2} />
       <AnimatedBlob size="medium" color="white" position="bottom-right" delay={0} />
@@ -35,11 +35,11 @@ const WorkingProcess = () => {
       <div className="container mx-auto px-4 relative z-10 max-w-5xl">
         <div className="text-center mb-16">
           <div className="mb-2">
-            <div className="h-1 w-16 bg-red-600 mx-auto"></div>
+            <div className="h-1 w-16 bg-[#38B6FF] mx-auto"></div>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             <span className="text-white">YOUR FUTURE </span>
-            <span className="text-red-600">NABSTERPLAN.</span>
+            <span className="text-[#38B6FF]">NABSTERPLAN.</span>
           </h2>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto">
             We'll take care of you, so you can take care of your business.
@@ -58,7 +58,7 @@ const WorkingProcess = () => {
                 />
               </div>
               <h3 className="text-xl font-bold mb-1">
-                <span className="text-red-600">{step.step}. </span>
+                <span className="text-[#38B6FF]">{step.step}. </span>
                 {step.title}
               </h3>
               <p className="text-gray-400 text-sm">{step.description}</p>
@@ -83,7 +83,7 @@ const WorkingProcess = () => {
 
         {/* CTA Button */}
         <div className="text-center mt-16" >
-          <Button className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-md text-lg font-medium" style={{marginTop:"6em"}}>
+          <Button className="bg-[#38B6FF] hover:bg-white hover:text-black text-white px-8 py-3 rounded-md text-lg font-medium" style={{marginTop:"6em"}}>
             START MY MARKETING PLAN
           </Button>
         </div>
