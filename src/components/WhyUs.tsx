@@ -1,7 +1,7 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, Circle, Square, Triangle, Hexagon } from "lucide-react";
 import FloatingEmoji from "./FloatingEmoji";
 
 const WhyUs = () => {
@@ -17,7 +17,9 @@ const WhyUs = () => {
     "Social Media Integration",
     "Analytics & Performance Tracking",
     "Professional Branding & Logo",
-    "Cross-Browser Compatibility"
+    "Cross-Browser Compatibility",
+    "E-commerce Integration",
+    "Cloud Hosting & Backup"
   ];
 
   return (
@@ -54,16 +56,50 @@ const WhyUs = () => {
               </div>
             </div>
 
-            {/* Right Column - Simple Human Face Image */}
+            {/* Right Column - Image with Geometric Shapes */}
             <div className="flex justify-center items-center">
               <div className="relative">
-                <div className="w-80 h-80 rounded-full overflow-hidden shadow-2xl border-4 border-[#38B6FF]">
+                {/* Main Image */}
+                <div className="w-80 h-80 rounded-full overflow-hidden shadow-2xl border-4 border-[#38B6FF] relative z-10">
                   <img
                     src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                     alt="Professional consultant"
                     className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
                   />
                 </div>
+                
+                {/* Floating Geometric Shapes */}
+                <div className="absolute -top-8 -right-8 animate-bounce">
+                  <Circle className="w-12 h-12 text-[#38B6FF] fill-[#38B6FF]/20" />
+                </div>
+                
+                <div className="absolute -bottom-6 -left-6 animate-pulse">
+                  <Square className="w-10 h-10 text-[#38B6FF] fill-[#38B6FF]/30" />
+                </div>
+                
+                <div className="absolute top-4 -left-8 animate-bounce" style={{ animationDelay: '1s' }}>
+                  <Triangle className="w-8 h-8 text-[#38B6FF] fill-[#38B6FF]/25" />
+                </div>
+                
+                <div className="absolute -top-4 left-1/3 animate-pulse" style={{ animationDelay: '0.5s' }}>
+                  <Hexagon className="w-6 h-6 text-[#38B6FF] fill-[#38B6FF]/20" />
+                </div>
+                
+                <div className="absolute bottom-8 -right-4 animate-bounce" style={{ animationDelay: '1.5s' }}>
+                  <div className="w-4 h-4 bg-[#38B6FF]/40 rounded-full"></div>
+                </div>
+                
+                <div className="absolute top-1/2 -right-10 animate-pulse" style={{ animationDelay: '2s' }}>
+                  <div className="w-6 h-6 bg-[#38B6FF]/30 transform rotate-45"></div>
+                </div>
+                
+                <div className="absolute -bottom-8 left-1/3 animate-bounce" style={{ animationDelay: '0.8s' }}>
+                  <div className="w-3 h-8 bg-[#38B6FF]/35 rounded-full"></div>
+                </div>
+                
+                {/* Floating rings */}
+                <div className="absolute top-12 right-12 w-16 h-16 border-2 border-[#38B6FF]/30 rounded-full animate-spin" style={{ animationDuration: '8s' }}></div>
+                <div className="absolute bottom-16 left-8 w-12 h-12 border-2 border-[#38B6FF]/20 rounded-full animate-ping"></div>
               </div>
             </div>
           </div>
