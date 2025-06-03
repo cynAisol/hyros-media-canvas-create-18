@@ -411,14 +411,14 @@ const Index = () => {
 							{[...portfolioImages, ...portfolioImages].map((image, index) => (
 								<div 
 									key={index} 
-									className="min-w-[400px] h-[500px] flex-shrink-0 relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+									className="min-w-[400px] h-[500px] flex-shrink-0 relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white"
 								>
 									<img
 										src={image}
 										alt={`Portfolio item ${index + 1}`}
-										className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+										className="w-full h-full object-contain hover:scale-105 transition-transform duration-500 p-4"
 									/>
-									<div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+									<div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent"></div>
 								</div>
 							))}
 						</div>
