@@ -26,15 +26,13 @@ const WhyUs = () => {
             Why Choose Us
           </Badge>
           
-          {/* Prominent CTA Button */}
-          <div className="mb-12">
-            <Button className="bg-[#38B6FF] hover:bg-[#2a9ee6] text-white px-12 py-8 text-2xl font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-              GET YOUR FREE PREVIEW
-            </Button>
-            <p className="text-sm text-foreground mt-4 opacity-80">
-              No commitment required
-            </p>
-          </div>
+          {/* Title and Subheader */}
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+            WHY BUSINESSES TRUST US
+          </h2>
+          <p className="text-xl text-foreground max-w-3xl mx-auto mb-12">
+            We deliver exceptional results through our proven expertise and dedication to your success
+          </p>
         </div>
 
         <div className="max-w-6xl mx-auto">
@@ -77,6 +75,16 @@ const WhyUs = () => {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* CTA Button at Bottom */}
+        <div className="text-center mt-16">
+          <Button className="bg-[#38B6FF] hover:bg-[#2a9ee6] text-white px-12 py-8 text-2xl font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+            GET YOUR FREE PREVIEW
+          </Button>
+          <p className="text-sm text-foreground mt-4 opacity-80">
+            No commitment required
+          </p>
         </div>
 
         {/* Floating Emojis */}
