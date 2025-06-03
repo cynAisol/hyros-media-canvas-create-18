@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -159,43 +160,12 @@ const Index = () => {
 		},
 	];
 
-	const portfolioItems = [
-		{
-			title: "Bringing The Lion Group's vision to life and increasing leads by 142%",
-			description: "The Lion Group, an eCommerce accelerator for Fortune 500 firms and fast-growing startups, outgrew its website. We did a full revamp, including conversion-focused design, messaging, and strategy.",
-			image: "/img/website1.png",
-			url: "https://atoleajewelry.com/",
-		},
-		{
-			title: "Transforming Fiddlers Green CBD's digital presence",
-			description: "We helped Fiddler's Green with a full brand and design refresh. They had touching customer stories about regaining their fullest lives with its CBD products. However, their website wasn't conveying this message. Our redesign increased store orders by 158%.",
-			image: "/img/website2.png",
-			url: "https://burstoralcare.com/",
-		},
-		{
-			title: "E-commerce Platform Redesign",
-			description: "Complete overhaul of an online marketplace, improving user experience and conversion rates by 200%.",
-			image: "/img/website3.png",
-			url: "#",
-		},
-		{
-			title: "SaaS Dashboard Optimization",
-			description: "Streamlined dashboard design for a B2B SaaS platform, reducing user onboarding time by 60%.",
-			image: "/img/website4.png",
-			url: "#",
-		},
-		{
-			title: "Healthcare Platform Development",
-			description: "Comprehensive healthcare management system with improved patient engagement and 99.9% uptime.",
-			image: "/img/website5.png",
-			url: "#",
-		},
-		{
-			title: "Fintech Mobile App",
-			description: "Secure and intuitive mobile banking solution with advanced security features and seamless UX.",
-			image: "/img/website6.png",
-			url: "#",
-		},
+	const portfolioImages = [
+		"/lovable-uploads/6407fda7-fe65-47e6-80d5-e30ec548cdc5.png",
+		"/lovable-uploads/ac342496-ab53-443d-a8ae-b34eb5e19f4f.png",
+		"/lovable-uploads/999a0170-625b-4c70-bc2d-051f29df4df3.png",
+		"/lovable-uploads/d9a5f0be-df63-44b7-a6e5-d62f8ee37e09.png",
+		"/lovable-uploads/25d3ec96-6fac-4c49-9391-e7dde7500659.png",
 	];
 
 	const typingTexts = ["ORDERS", "BOOKING", "SALES"];
@@ -403,7 +373,7 @@ const Index = () => {
 			{/* Benefits/Why US Section */}
 			<WhyUs />
 
-			{/* Portfolio Section */}
+			{/* Portfolio Section - Auto Scrolling Images */}
 			<section
 				id="portfolio"
 				className="py-20 bg-background relative overflow-hidden"
@@ -428,63 +398,29 @@ const Index = () => {
 					{/* Header Section */}
 					<div className="text-center mb-16">
 						<h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-							High-performing websites with <span className="text-[#38B6FF]">proven results</span>
+							Our Creative Portfolio
 						</h2>
 						<p className="text-lg text-foreground max-w-4xl mx-auto">
-							We've found success working with teams in nearly every industry, from startups to large enterprises that get over 400k visitors to their website per month.
+							Discover our latest work showcasing innovative designs and cutting-edge web solutions.
 						</p>
 					</div>
 
-					{/* Portfolio Cards Grid - 2 per row */}
-					<div className="grid md:grid-cols-2 gap-8 mb-16">
-						{portfolioItems.map((item, index) => (
-							<div key={index} className="group">
-								<div className="bg-card border border-border rounded-3xl p-8 h-auto flex flex-col hover:shadow-xl transition-all duration-500">
-									{/* Website Image */}
-									<div className="bg-white rounded-2xl p-6 mb-6 shadow-lg">
-										<img
-											src={item.image}
-											alt={item.title}
-											className="w-full h-auto rounded-lg shadow-md"
-										/>
-									</div>
-									
-									{/* Content */}
-									<div className="text-foreground flex-grow">
-										<h3 className="text-2xl font-bold mb-4 leading-tight text-foreground">
-											{item.title}
-										</h3>
-										<p className="text-foreground/80 mb-6 leading-relaxed">
-											{item.description}
-										</p>
-										
-										{/* CTA Button */}
-										<div className="mt-auto">
-											<button className="border-2 border-[#38B6FF] text-[#38B6FF] px-6 py-3 rounded-lg hover:bg-[#38B6FF] hover:text-white transition-all duration-300 font-medium">
-												View Case Study
-											</button>
-										</div>
-									</div>
+					{/* Auto Scrolling Portfolio Images */}
+					<div className="relative overflow-hidden">
+						<div className="flex animate-scroll gap-8" style={{ width: 'calc(400px * 10)' }}>
+							{[...portfolioImages, ...portfolioImages].map((image, index) => (
+								<div 
+									key={index} 
+									className="min-w-[400px] h-[500px] flex-shrink-0 relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+								>
+									<img
+										src={image}
+										alt={`Portfolio item ${index + 1}`}
+										className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+									/>
+									<div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
 								</div>
-							</div>
-						))}
-					</div>
-
-					{/* Additional Portfolio Showcase Card */}
-					<div className="flex justify-center mt-12">
-						<div className="bg-card rounded-xl shadow-lg p-6 max-w-lg text-left border border-border hover:shadow-2xl transform hover:scale-105 transition-all duration-500 relative overflow-hidden">
-							{/* Animated background */}
-							<div className="absolute inset-0 bg-gradient-to-r from-[#38B6FF]/5 to-white/5"></div>
-							<div className="relative z-10">
-								<div className="text-[#38B6FF] font-bold mb-2 flex items-center gap-2">
-									<span>🎯</span>
-									<span>Showcase Highlight</span>
-								</div>
-								<div className="text-foreground">
-									Each project represents our commitment to quality, innovation,
-									and client success. Ready to see your vision come to life?
-								</div>
-							</div>
+							))}
 						</div>
 					</div>
 				</div>
